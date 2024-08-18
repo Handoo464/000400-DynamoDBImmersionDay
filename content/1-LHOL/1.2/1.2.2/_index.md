@@ -1,0 +1,141 @@
+---
+title : "Reading Item Collections using Query"
+date : "`r Sys.Date()`"
+weight : 2.
+chapter : false
+pre : " <b> 1.2.2. </b> "
+---
+
+Before we can do anything we have to learn what our data looks like.
+
+DynamoDB provides the [Scan API](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Scan.html)  which can be invoked using the [scan CLI command](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/scan.html) . Scan will do a full table scan and return the items in 1MB chunks. Scanning is the slowest and most expensive way to get data out of DynamoDB; Scanning this on a large table from the CLI might be unwieldy but we know there are only a few items in our sample data so its OK to do here. Try running a scan on the ProductCatalog table:
+
+```bash
+aws dynamodb scan --table-name ProductCatalog
+```
+
+Use the arrow keys to move up and down through the _Scan_ response. **Type `:q` and hit enter to exit the viewer** once you're done reviewing the response.
+
+Data input and output in the CLI utilizes the DynamoDB JSON format, which is described in the [DynamoDB Low-Level API](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.LowLevelAPI.html)  section of the Developer Guide.
+
+We can see from our data that this ProductCatalog table has two types of products: Book and Bicycle items.
+
+If we wanted to read just a single item, we would use the [GetItem API](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_GetItem.html)  which can be invoked using the [get-item CLI command](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/get-item.html) . GetItem is the fastest and cheapest way to get data out of DynamoDB as you must specify the full Primary Key so the command is guaranteed to match at most one item in the table.
+
+```bash
+aws dynamodb get-item \
+    --table-name ProductCatalog \
+    --key '{"Id":{"N":"101"}}'
+```
+
+By default a read from DynamoDB will use _eventual consistency_ because eventually consistent reads in DynamoDB are half the price of a _strongly consistent_ read. See [Read Consistency](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html)  in the DynamoDB Developer Guide for more information.
+
+There are many useful options to the get-item command but a few that get used regularly are:
+
+- _--consistent-read_ : Specifying that you want a strongly consistent read
+- _--projection-expression_ : Specifying that you only want certain attributes returned in the request
+- _--return-consume-capacity_ : Tell us how much capacity was consumed by the request
+
+Let's run the previous command and add some of these options to the command line:
+
+```bash
+aws dynamodb get-item \
+    --table-name ProductCatalog \
+    --key '{"Id":{"N":"101"}}' \
+    --consistent-read \
+    --projection-expression "ProductCategory, Price, Title" \
+    --return-consumed-capacity TOTAL
+```
+
+We can see from the returned values:
+
+```json
+{
+    "Item": {
+        "Price": {
+            "N": "2"
+        },
+        "Title": {
+            "S": "Book 101 Title"
+        },
+        "ProductCategory": {
+            "S": "Book"
+        }
+    },
+    "ConsumedCapacity": {
+        "TableName": "ProductCatalog",
+        "CapacityUnits": 1.0
+    }
+}
+```
+
+That performing this request consume 1.0 RCU, because this item is less than 4KB. If we run the command again but remove the _--consistent-read_ option, we will see that eventually consistent reads consume half as much capacity:
+
+```bash
+aws dynamodb get-item \
+    --table-name ProductCatalog \
+    --key '{"Id":{"N":"101"}}' \
+    --projection-expression "ProductCategory, Price, Title" \
+    --return-consumed-capacity TOTAL
+```
+
+We will see this output:
+
+```
+{
+    "Item": {
+        "Price": {
+            "N": "2"
+        },
+        "Title": {
+            "S": "Book 101 Title"
+        },
+        "ProductCategory": {
+            "S": "Book"
+        }
+    },
+    "ConsumedCapacity": {
+        "TableName": "ProductCatalog",
+        "CapacityUnits": 0.5
+    }
+}
+```
+
+Read the documentation for[--max-items](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/query.html#synopsis)  and write two queries:
+
+- return only the first reply to a thread
+- return only the most recent reply for a thread
+
+Hint: consider the _max-items_, _scan-index-forward_, and _no-scan-index-forward_ options. The solution is expandable below but try to figure it out yourself before moving forward.
+
+**Click below to expand and see the exercise solutions**
+
+Expand this to see the solution
+
+If we want to order items in ascending order of the sort key then we tell DynamoDB to scan the index moving forward using the _--scan-index-forward_ option. If we want to limit the number of items then we use the _--max-items_ option. This would be analogous in SQL to "ORDER BY ReplyDateTime ASC LIMIT 1".
+
+```bash
+aws dynamodb query \
+    --table-name Reply \
+    --key-condition-expression 'Id = :Id' \
+    --expression-attribute-values '{
+        ":Id" : {"S": "Amazon DynamoDB#DynamoDB Thread 1"}
+    }' \
+    --max-items 1 \
+    --scan-index-forward  \
+    --return-consumed-capacity TOTAL
+```
+
+If we want DynamoDB to order items in descending order of the sort key then we tell DynamoDB to scan the index backward using the _--no-scan-index-forward_ option. If we want to do the SQL analog to "ORDER BY ReplyDateTime DESC LIMIT 1" we would run:
+
+```bash
+aws dynamodb query \
+    --table-name Reply \
+    --key-condition-expression 'Id = :Id' \
+    --expression-attribute-values '{
+        ":Id" : {"S": "Amazon DynamoDB#DynamoDB Thread 1"}
+    }' \
+    --max-items 1 \
+    --no-scan-index-forward  \
+    --return-consumed-capacity TOTAL
+```

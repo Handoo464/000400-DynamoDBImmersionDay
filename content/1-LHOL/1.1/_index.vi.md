@@ -1,0 +1,13 @@
+---
+title : "Chuẩn bị"
+date :  "`r Sys.Date()`" 
+weight : 1 
+chapter : false
+pre : " <b> 1.1. </b> "
+---
+
+Trong chương này, chúng ta sẽ đề cập đến các yêu cầu cần thiết để bắt đầu với  [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html). Bạn sẽ tạo các bảng DynamoDB và sử dụng môi trường AWS Cloud9 để truy vấn các bảng này.
+
+Kiến trúc triển khai mà bạn sẽ xây dựng trong lab này sẽ như hình dưới đây.
+
+![jb](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/hands-on-labs/setup/dynamodb_lab_architecture.png)
