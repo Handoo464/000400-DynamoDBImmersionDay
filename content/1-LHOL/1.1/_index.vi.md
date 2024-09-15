@@ -10,4 +10,4 @@ Trong chương này, chúng ta sẽ đề cập đến các yêu cầu cần thi
 
 Kiến trúc triển khai mà bạn sẽ xây dựng trong lab này sẽ như hình dưới đây.
 
-![jb](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/hands-on-labs/setup/dynamodb_lab_architecture.png)
+![jb](images/1/1.1/1-1.png)

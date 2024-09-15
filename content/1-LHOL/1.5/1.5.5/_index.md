@@ -8,7 +8,7 @@ pre : " <b> 1.5.5. </b> "
 
 Relational Database Management System (RDBMS) platforms store data in a normalized relational structure. This structure reduces hierarchical data structures and stores data across multiple tables. You can often query the data from multiple tables and assemble at the presentation layer. However, that is not preferrable and won't be efficient for ultra-low read latency workloads. To support high-traffic queries with ultra-low latency, designing a schema to take advantage of a NoSQL system generally makes technical and economic sense.
 
-To start designing a target data model in Amazon DynamoDB that will scale efficiently, you must identify the common access patterns. For the IMDb use case we have identified a set of access patterns as described below: ![Final Deployment Architecture](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/migration32.png)
+To start designing a target data model in Amazon DynamoDB that will scale efficiently, you must identify the common access patterns. For the IMDb use case we have identified a set of access patterns as described below: ![Final Deployment Architecture](/images/1/1.5/16.png)
 
 A common approach to DynamoDB schema design is to identify application layer entities and use denormalization and composite key aggregation to reduce query complexity. In DynamoDB, this means using [composite sort keys](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-sort-keys.html) , [overloaded global secondary indexes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-gsi-overloading.html) , and other design patterns.
 
@@ -29,10 +29,10 @@ The following entity types are found in the table:
 - `REGN`: Contains all regions, languages and titles that a movie is published. During target modelling the data is migrated as is to the DynamoDB table.
 - `RTNG`: Contains IMDb rating and number of votes. This is considered dynamic and frequent changing records for a movie. In order to reduce I/O during update scenario, the record is not denormalized with other information in the the DynamoDB table.
 
-![Final Deployment Architecture](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/migration33.png)
+![Final Deployment Architecture](/images/1/1.5/17.png)
 
 A new GSI is created on the movies table with new partion key: `nconst` (unique per movie's crew with entity type `nm`) and sort key: `startYear`. This will help to query access pattern by crew member (#6 inside the common access pattern table)
 
-![Final Deployment Architecture](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/migration34.png)
+![Final Deployment Architecture](/images/1/1.5/18.png)
 
-[Click here to view a video that demonstrates how all of these access pattern are evaluated against target DynamoDB model](https://www.amazondynamodblabs.com/static/rdbms-migration/migration36.mp4)
+[Click here to view a video that demonstrates how all of these access pattern are evaluated against target DynamoDB model](/images/1/1.5/1.mp4)

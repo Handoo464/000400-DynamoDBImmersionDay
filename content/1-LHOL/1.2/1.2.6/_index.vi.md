@@ -6,15 +6,15 @@ chapter : false
 pre : " <b> 1.2.6. </b> "
 ---
 
-**TransactWriteItems** API của DynamoDB là một hoạt động ghi đồng bộ, cho phép nhóm tối đa 100 yêu cầu hành động (với giới hạn kích thước 4MB tổng cho giao dịch). Nó được gọi thông qua lệnh CLI **transact-write-items**.
+DynamoDB cung cấp [API TransactWriteItems](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_TransactWriteItems.html), một thao tác ghi đồng bộ nhóm lên đến 100 yêu cầu hành động (tổng cộng không vượt quá giới hạn kích thước 4MB cho giao dịch). Nó được gọi bằng [lệnh CLI transact-write-items](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/transact-write-items.html).
 
-Các hành động này có thể nhắm đến các item trong nhiều bảng khác nhau, nhưng không thể ở các tài khoản hoặc vùng AWS khác nhau, và không hai hành động nào được nhắm đến cùng một item. Các hành động được hoàn thành một cách nguyên tử, có nghĩa là hoặc tất cả chúng thành công, hoặc tất cả chúng thất bại. Để tìm hiểu thêm về các mức độ cô lập cho giao dịch, bạn có thể tham khảo [Developer Guide](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/transaction-apis.html#transaction-isolation).
+Các hành động này có thể nhắm đến các mục trong các bảng khác nhau, nhưng không thể nhắm đến các tài khoản hoặc Vùng AWS khác nhau, và không có hai hành động nào có thể nhắm đến cùng một mục. Các hành động được hoàn thành một cách nguyên tử sao cho tất cả đều thành công, hoặc tất cả đều thất bại. Để thảo luận sâu hơn về Cấp độ Cô lập cho Giao dịch, hãy xem [Hướng dẫn Dành cho Nhà Phát triển](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/transaction-apis.html#transaction-isolation).
 
-Bạn sẽ nhớ từ các mô-đun trước rằng dữ liệu mẫu chứa nhiều bảng có liên quan: **Forum**, **Thread**, và **Reply**. Khi thêm một item mới **Reply**, chúng ta cũng cần tăng số **Messages** trong item **Forum** liên quan. Điều này cần được thực hiện trong một giao dịch để cả hai thay đổi đều thành công hoặc cả hai thay đổi đều thất bại cùng một lúc, và ai đó đang đọc dữ liệu này sẽ thấy cả hai thay đổi hoặc không nhìn thấy thay đổi nào.
+Bạn sẽ nhớ từ các mô-đun trước rằng dữ liệu mẫu chứa nhiều bảng liên quan: **Forum**, **Thread**, và **Reply**. Khi một mục **Reply** mới được thêm vào, chúng ta cũng cần tăng số lượng Messages trong mục **Forum** liên quan. Điều này nên được thực hiện trong một giao dịch để cả hai thay đổi đều thành công hoặc cả hai thay đổi đều thất bại cùng một lúc, và ai đó đọc dữ liệu này sẽ thấy cả hai thay đổi hoặc không thấy thay đổi nào cùng một lúc.
 
-Giao dịch trong DynamoDB tôn trọng khái niệm **idempotency (tính đồng nhất)** . Idempotency giúp bạn có khả năng gửi cùng một giao dịch nhiều lần, nhưng DynamoDB chỉ thực hiện giao dịch đó một lần. Điều này đặc biệt hữu ích khi sử dụng các API không phải là idempotent, chẳng hạn như sử dụng **UpdateItem** để tăng hoặc giảm một trường số. Khi thực hiện một giao dịch, bạn sẽ chỉ định một chuỗi để đại diện cho **ClientRequestToken** (còn gọi là Idempotency Token). Để tìm hiểu thêm về idempotency, xin vui lòng xem  [Developer Guide](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/transaction-apis.html).
+Giao dịch trong DynamoDB tôn trọng khái niệm idempotency. Idempotency cho phép bạn gửi cùng một giao dịch nhiều lần, nhưng DynamoDB sẽ chỉ thực thi giao dịch đó một lần. Điều này đặc biệt hữu ích khi sử dụng các API không tự chúng là idempotent, như sử dụng UpdateItem để tăng hoặc giảm một trường số. Khi thực thi một giao dịch, bạn sẽ chỉ định một chuỗi để đại diện cho **ClientRequestToken** (còn gọi là Idempotency Token). Để thảo luận thêm về idempotency, vui lòng xem [Hướng dẫn Dành cho Nhà Phát triển](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/transaction-apis.html).
 
-Lệnh trong CLI sẽ là:
+Lệnh này trong CLI sẽ là:
 
 ```bash
 aws dynamodb transact-write-items --client-request-token TRANSACTION1 --transact-items '[
@@ -40,7 +40,7 @@ aws dynamodb transact-write-items --client-request-token TRANSACTION1 --transact
 ]'
 ```
 
-Khi bạn nhìn vào item **Forum**, bạn sẽ thấy rằng số lượng **Messages** đã được tăng thêm 1, từ 4 lên 5.
+Hãy xem mục **Forum** và bạn sẽ thấy rằng số đếm Messages đã được tăng lên 1, từ 4 lên 5.
 
 ```bash
 aws dynamodb get-item \
@@ -48,9 +48,17 @@ aws dynamodb get-item \
     --key '{"Name" : {"S": "Amazon DynamoDB"}}'
 ```
 
-Nếu bạn chạy cùng một lệnh giao dịch một lần nữa, với cùng một giá trị **client-request-token**, bạn có thể xác minh rằng các lần thực hiện giao dịch khác về cơ bản bị bỏ qua và số **Messages** vẫn giữ nguyên ở mức 5.
+```text
+...
+"Messages": {
+    "N": "5"
+}
+...
+```
 
-Bây giờ chúng ta cần thực hiện một giao dịch khác để đảo ngược hoạt động trên và dọn dẹp bảng:
+Nếu bạn chạy cùng lệnh giao dịch này một lần nữa với cùng giá trị `client-request-token`, bạn có thể xác minh rằng các lần thực thi khác của giao dịch về cơ bản bị bỏ qua và thuộc tính **Messages** vẫn giữ nguyên ở **5**.
+
+Bây giờ chúng ta cần thực hiện một giao dịch khác để đảo ngược thao tác trên và dọn dẹp bảng:
 
 ```bash
 aws dynamodb transact-write-items --client-request-token TRANSACTION2 --transact-items '[

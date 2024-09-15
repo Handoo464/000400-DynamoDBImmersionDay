@@ -6,12 +6,11 @@ chapter : false
 pre : " <b> 1.2.5. </b> "
 ---
 
+DynamoDB cung cấp [API DeleteItem](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DeleteItem.html) để xóa một mục. Nó được gọi bằng [lệnh CLI delete-item](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/delete-item.html).
 
-[DeleteItem API](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DeleteItem.html) của DynamoDB được sử dụng để xóa một mục. Nó được gọi bằng lệnh  [delete-item CLI command](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/delete-item.html) .
+Việc xóa trong DynamoDB luôn là các thao tác đơn lẻ. Không có lệnh nào mà bạn có thể chạy để xóa tất cả các hàng trong bảng, chẳng hạn.
 
-Việc xóa trong DynamoDB luôn là các thao tác đơn lẻ. Không có lệnh đơn nào bạn có thể thực hiện để xóa tất cả các hàng trong bảng trong một lần thực hiện.
-
-Nhớ rằng mục mà chúng ta đã thêm vào bảng `Reply` trong đường dẫn trước:
+Hãy nhớ mục mà chúng ta đã thêm vào bảng **Reply** trong phần trước:
 
 ```bash
 aws dynamodb get-item \
@@ -22,7 +21,7 @@ aws dynamodb get-item \
     }'
 ```
 
-Bây giờ, chúng ta sẽ xóa mục này. Khi sử dụng lệnh `delete-item`, chúng ta cần tham chiếu đầy đủ Khóa chính như chúng ta đã làm với `get-item`:
+Hãy xóa mục này. Khi sử dụng lệnh `delete-item`, chúng ta cần tham chiếu đến đầy đủ Khóa Chính giống như khi dùng `get-item`:
 
 ```bash
 aws dynamodb delete-item \
@@ -33,9 +32,9 @@ aws dynamodb delete-item \
     }'
 ```
 
-Việc xóa một mục nhiều lần là an toàn. Bạn có thể chạy lệnh trên bao nhiêu lần tùy thích mà không báo cáo lỗi; nếu khóa không tồn tại, thì API `DeleteItem` vẫn trả về thành công.
+Bạn có thể an toàn xóa cùng một mục nhiều lần. Bạn có thể chạy cùng một lệnh trên nhiều lần tùy ý mà không gặp lỗi; nếu khóa không tồn tại thì API DeleteItem vẫn trả về thành công.
 
-Sau khi đã xóa mục đó khỏi bảng `Reply`, chúng ta cũng cần giảm số lượng tin nhắn liên quan **Forum** _Messages_ count.
+Sau khi chúng ta đã xóa mục đó khỏi bảng **Reply**, chúng ta cũng cần giảm số đếm **Messages** liên quan trong bảng **Forum**.
 
 ```bash
 aws dynamodb update-item \

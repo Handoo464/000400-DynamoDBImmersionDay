@@ -6,7 +6,7 @@ chapter : false
 ---
 # Amazon DynamoDB Immersion Day
 
-![Mở Biểu trưng DynamoDB](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/Amazon-DynamoDB.png)
+![Mở Biểu trưng DynamoDB](images/1/dynamodb.png)
 
 Welcome to the AWS Workshop and Lab Content Portal for [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html), a key-value and document database that delivers single-digit millisecond performance at any scale. Here you will find a collection of workshops and hands-on content aimed at helping you gain an understanding of DynamoDB features and NoSQL data modeling best practices.
 
@@ -19,12 +19,12 @@ If you're brand new to DynamoDB with no experience, you may want to begin with *
 The DynamoDB Immersion Day has a series of workshops designed to cover advanced topics. If you want to dig deep into streaming aggregations with AWS Lambda and DynamoDB Streams, consider LEDA. Or if you want an easier introduction CDC you can consider LCDC.
 Do you want to integrate Generative AI to create a context-aware reasoning application? If so consider LBED, a lab that takes a product catalog from DynamoDB and contiously indexes it into OpenSearch Service for natural language queries supported by Amazon Bedrock.
 
-Nội dung:
-- [LHOL: Hands-on Labs for Amazon DynamoDB](https://catalog.workshops.aws/dynamodb-labs/en-US/hands-on-labs)
-- [LBED: Generative AI with DynamoDB zero-ETL to OpenSearch integration and Amazon Bedrock](https://catalog.workshops.aws/dynamodb-labs/en-US/dynamodb-opensearch-zetl)
-- [LADV: Advanced Design Patterns for Amazon DynamoDB](https://catalog.workshops.aws/dynamodb-labs/en-US/design-patterns)
-- [LCDC: Change Data Capture for Amazon DynamoDB](https://catalog.workshops.aws/dynamodb-labs/en-US/change-data-capture)
-- [LMR: Build and Deploy a Global Serverless Application with Amazon DynamoDB](https://catalog.workshops.aws/dynamodb-labs/en-US/global-serverless-application)
-- [LGME: Modeling Game Player Data with Amazon DynamoDB](https://catalog.workshops.aws/dynamodb-labs/en-US/game-player-data)
-- [LDC: Design Challenges](https://catalog.workshops.aws/dynamodb-labs/en-US/scenarios)
-- [Contributors to the Immersion Day](https://catalog.workshops.aws/dynamodb-labs/en-US/authors)
+Dive into the content:
+- LHOL: Hands-on Labs for Amazon DynamoDB
+- LBED: Generative AI with DynamoDB zero-ETL to OpenSearch integration and Amazon Bedrock
+- LADV: Advanced Design Patterns for Amazon DynamoDB
+- LCDC: Change Data Capture for Amazon DynamoDB
+- LMR: Build and Deploy a Global Serverless Application with Amazon DynamoDB
+- LEDA: Build a Serverless Event Driven Architecture with DynamoDB
+- LGME: Modeling Game Player Data with Amazon DynamoDB
+- LDC: Design Challenges

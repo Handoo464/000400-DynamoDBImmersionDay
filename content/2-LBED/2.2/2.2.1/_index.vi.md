@@ -6,47 +6,49 @@ chapter : false
 pre : " <b> 2.2.1. </b> "
 ---
 
-Miền OpenSearch Service được triển khai bởi Mẫu CloudFormation sử dụng Kiểm soát truy cập chi tiết. Kiểm soát truy cập chi tiết cung cấp các cách bổ sung để kiểm soát quyền truy cập vào dữ liệu của bạn trên Amazon OpenSearch Service. Để cấu hình tích hợp giữa OpenSearch Service, DynamoDB và Bedrock, một số quyền OpenSearch Service nhất định sẽ cần được ánh xạ tới Vai trò IAM đang được sử dụng.
+Miền OpenSearch Service được triển khai bởi CloudFormation Template sử dụng kiểm soát truy cập chi tiết (Fine-grained access control). Kiểm soát truy cập chi tiết cung cấp thêm các cách kiểm soát truy cập vào dữ liệu của bạn trên Amazon OpenSearch Service. Để cấu hình tích hợp giữa OpenSearch Service, DynamoDB và Bedrock, một số quyền OpenSearch Service sẽ cần được ánh xạ với IAM Role đang được sử dụng.
 
-Liên kết đến Bảng thông tin OpenSearch, thông tin xác thực và các giá trị cần thiết được cung cấp trong Đầu ra của DynamoDBzETL [Sự hình thành đám mây](https://console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/)  Mẫu. Bạn nên để Đầu ra mở trong một tab trình duyệt để dễ dàng tham khảo trong khi theo dõi qua phòng thí nghiệm.
+Các liên kết đến OpenSearch Dashboards, thông tin đăng nhập, và các giá trị cần thiết được cung cấp trong phần Outputs của DynamoDBzETL [CloudFormation](https://console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/) Template. Nên để tab Outputs mở trong một tab trình duyệt để dễ dàng tham khảo trong khi theo dõi bài lab.
 
-Trong môi trường sản xuất như một phương pháp hay nhất, bạn sẽ định cấu hình các vai trò với ít đặc quyền nhất cần thiết. Để đơn giản trong phòng thực hành này, chúng tôi sẽ sử dụng vai trò OpenSearch Service "all_access".
+Trong môi trường sản xuất, một thực hành tốt là cấu hình các vai trò với quyền tối thiểu cần thiết. Để đơn giản trong lab này, chúng ta sẽ sử dụng vai trò "all_access" của OpenSearch Service.
 
-_Không tiếp tục trừ khi Mẫu CloudFormation đã triển khai xong._
+{{%notice tip%}}
+_Không tiếp tục nếu CloudFormation Template chưa hoàn tất triển khai._
+{{%/notice%}}
 
-1. Mở tab "Đầu ra" của ngăn xếp có tên trong Bảng điều khiển CloudFormation.`dynamodb-opensearch-setup`
+1. Mở tab "Outputs" của stack có tên `dynamodb-opensearch-setup` trong CloudFormation Console.
     
-    ![Đầu ra CloudFormation](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/ddb-os-zetl3.jpg)
+   ![CloudFormation Outputs](/images/2/2.2/1.jpg)
     
-2. Mở liên kết cho SecretConsoleLink trong một tab mới. Thao tác này sẽ đưa bạn đến bí mật AWS Secrets Manager chứa thông tin đăng nhập cho OpenSearch. Nhấp vào nút để xem tên người dùng và mật khẩu cho OpenSearch Cluster.`Retrieve secret value`
+2. Mở liên kết "SecretConsoleLink" trong một tab mới. Điều này sẽ đưa bạn đến bí mật trong AWS Secrets Manager chứa thông tin đăng nhập cho OpenSearch. Nhấp vào nút `Retrieve secret value` để xem tên người dùng và mật khẩu cho OpenSearch Cluster.
     
-3. Quay lại Bảng điều khiển CloudFormation "Đầu ra" và mở liên kết cho **OSDashboardsURL** trong tab mới.
+3. Quay lại tab "Outputs" của CloudFormation Console và mở liên kết cho **OSDashboardsURL** trong một tab mới.
     
-4. Đăng nhập vào Trang tổng quan bằng tên người dùng và mật khẩu được cung cấp trong Trình quản lý bí mật.
+4. Đăng nhập vào Dashboards với tên người dùng và mật khẩu được cung cấp trong Secrets Manager.
     
-    ![Bảng thông tin OpenSearch Service](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/ddb-os-zetl4.jpg)
+   ![OpenSearch Service Dashboards](/images/2/2.2/2.jpg)
     
-5. Khi được nhắc chọn đối tượng thuê của bạn, hãy chọn _Toàn cầu_ và nhấp vào **Xác nhận**. Loại bỏ bất kỳ cửa sổ bật lên nào.
+5. Khi được nhắc chọn tenant, chọn _Global_ và nhấp vào **Confirm**. Đóng mọi cửa sổ bật lên.
     
-    ![Bảng thông tin OpenSearch Service](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/ddb-os-zetl18.jpg)
+   ![OpenSearch Service Dashboards](/images/2/2.2/3.jpg)
     
-6. Mở menu trên cùng bên trái và chọn **Bảo mật** trong phần _Quản lý_.
+6. Mở menu trên cùng bên trái và chọn **Security** trong phần _Management_.
     
-    ![Cài đặt bảo mật](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/ddb-os-zetl5.jpg)
+   ![Security Settings](/images/2/2.2/4.jpg)
     
-7. Mở tab "Vai trò", sau đó nhấp vào vai trò "all_access".
+7. Mở tab "Roles", sau đó nhấp vào vai trò "all_access".
     
-    ![Cài đặt vai trò](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/ddb-os-zetl6.jpg)
+   ![Roles Settings](/images/2/2.2/5.jpg)
     
-8. Mở tab "Người dùng được ánh xạ", sau đó chọn "Quản lý ánh xạ".
+8. Mở tab "Mapped users", sau đó chọn "Manage mapping".
     
-    ![Cài đặt ánh xạ](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/ddb-os-zetl7.jpg)
+   ![Mapping Settings](/images/2/2.2/6.jpg)
     
-9. Trong trường "Vai trò phụ trợ", hãy nhập Arn được cung cấp trong Đầu ra ngăn xếp CloudFormation. Thuộc tính có tên "Vai trò" cung cấp Arn chính xác.  
-    Hoàn toàn chắc chắn rằng bạn đã xóa bất kỳ ký tự khoảng trắng nào khỏi đầu và cuối ARN để đảm bảo bạn không gặp vấn đề về quyền sau này. Nhấp vào "Bản đồ".
+9. Trong trường "Backend roles", nhập Arn được cung cấp trong CloudFormation Stack Outputs. Thuộc tính có tên "Role" cung cấp Arn chính xác.  
+   Hãy chắc chắn rằng bạn đã xóa mọi ký tự khoảng trắng từ đầu và cuối của ARN để đảm bảo bạn không gặp vấn đề về quyền sau này. Nhấp vào "Map".
     
-    ![Cài đặt](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/ddb-os-zetl8.jpg)
+   ![Settings](/images/2/2.2/7.jpg)
     
-10. Xác minh rằng Vai trò "all_access" hiện có "Vai trò phụ trợ" được liệt kê.
+10. Xác minh rằng vai trò "all_access" hiện có một "Backend role" được liệt kê.
     
-    ![Cài đặt](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/ddb-os-zetl9.jpg)
+   ![Settings](/images/2/2.2/8.jpg)

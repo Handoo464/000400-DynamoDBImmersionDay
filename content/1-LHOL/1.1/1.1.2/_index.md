@@ -5,10 +5,11 @@ weight : 2
 chapter : false
 pre : " <b> 1.1.2. </b> "
 ---
+You can access the session manager, enter the command `sudo su`, then execute the commands. Alternatively, you can access Cloud9 and execute the following commands.
 
 We will now create tables (and in a subsequent step load data into them) based on sample data from the DynamoDB Developer Guide .
 
-Copy the create-table commands below and paste them into your AWS Cloud9 command prompt, hitting enter on the last command to execute it. Then use the corresponding wait commands by pasting them into the same terminal and running them.
+Copy the `create-table` commands below and paste them into your command prompt, hitting enter on the last command to execute it. Then use the corresponding wait commands by pasting them into the same terminal and running them.
 
 ```bash
 aws dynamodb create-table \

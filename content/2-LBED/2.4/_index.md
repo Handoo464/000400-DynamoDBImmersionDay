@@ -6,15 +6,15 @@ chapter : false
 pre : " <b> 2.4. </b> "
 ---
 
-Amazon Bedrock là một dịch vụ được quản lý toàn phần, cung cấp lựa chọn các mô hình nền tảng (FM) hiệu suất cao từ các công ty AI hàng đầu như AI21 Labs, Anthropic, Cohere, Meta, Mistral AI, Stability AI và Amazon thông qua một API duy nhất, cùng với một loạt các khả năng bạn cần để xây dựng các ứng dụng AI tổng quát với bảo mật, quyền riêng tư và AI có trách nhiệm.
+Now that you've created all required connectors and pipelines and data has replicated from DynamoDB into OpenSearch Service, you have quite a few options for how you want to query your data. You can do key/value looksups directly to DynamoDB, execute search queries against OpenSearch, and use Bedrock togther with Opensearch for natural language product recommendation.
 
-Truy vấn này sẽ sử dụng OpenSearch làm cơ sở dữ liệu vector để tìm sản phẩm phù hợp nhất với ý định mong muốn của bạn. Nội dung của chỉ mục OpenSearch được tạo thông qua trình kết nối DynamoDB Zero ETL. Khi bản ghi được thêm vào DynamoDB, trình kết nối sẽ tự động di chuyển chúng vào OpenSearch. OpenSearch sau đó sử dụng mô hình Titan Embeddings để trang trí dữ liệu đó.
+This query will use OpenSearch as a vector database to find the product that most closely matches your desired intent.The contents of the OpenSearch index were created through the DynamoDB Zero ETL connector. When records are added to DynamoDB, the connector automatically moves them into OpenSearch. OpenSearch then uses the Titan Embeddings model to decorate that data.
 
-Tập lệnh xây dựng một truy vấn tìm kiếm chỉ mục OpenSearch cho các sản phẩm có liên quan nhất đến văn bản nhập của bạn. Điều này được thực hiện bằng cách sử dụng truy vấn "thần kinh", tận dụng các nhúng được lưu trữ trong OpenSearch để tìm các sản phẩm có nội dung văn bản tương tự. Sau khi truy xuất các sản phẩm có liên quan, kịch bản sử dụng Bedrock để tạo ra phản hồi tinh vi hơn thông qua mô hình Claude. Điều này liên quan đến việc tạo một lời nhắc kết hợp truy vấn ban đầu của bạn với dữ liệu đã truy xuất và gửi lời nhắc này đến Bedrock để xử lý.
+The script constructs a query that searches the OpenSearch index for products that are most relevant to your input text. This is done using a "neural" query, which leverages the embeddings stored in OpenSearch to find products with similar textual content. After retrieving relevant products, the script uses Bedrock to generate a more sophisticated response through the Claude model. This involves creating a prompt that combines your original query with the retrieved data and sending this prompt to Bedrock for processing.
 
-1. Quay lại Bảng điều khiển Cloud9 IDE.
+1. Return to the Cloud9 IDE Console.
     
-2. Trước tiên, hãy gửi yêu cầu trực tiếp đến DynamoDB
+2. First, let's make a request to DynamoDB directly
     
     ```bash
       aws dynamodb get-item \
@@ -22,9 +22,9 @@ Tập lệnh xây dựng một truy vấn tìm kiếm chỉ mục OpenSearch cho
           --key '{"ProductID": {"S": "S020"}}'
     ```
     
-    Đây là ví dụ về tra cứu khóa/giá trị mà DynamoDB vượt trội. Nó trả về chi tiết sản phẩm cho một sản phẩm cụ thể, được xác định bằng ProductID của sản phẩm đó.
+    This is an example of a key/value lookup that DynamoDB excels at. It returns product details for a specific product, identified by its ProductID.
     
-3. Tiếp theo, hãy thực hiện một truy vấn tìm kiếm đến OpenSearch. Chúng tôi sẽ tìm thấy váy bao gồm "Spandex" trong mô tả của họ.
+3. Next, let's make a search query to OpenSearch. We'll find skirts that include "Spandex" in their description.
     
     ```bash
     curl --request POST \
@@ -57,23 +57,23 @@ Tập lệnh xây dựng một truy vấn tìm kiếm chỉ mục OpenSearch cho
       }' | jq .
     ```
     
-    Hãy thử thay đổi và xem kết quả thay đổi như thế nào.`Spandex``Polyester`
+    Try changing `Spandex` to `Polyester` and see how the results change.
     
-4. Cuối cùng, hãy yêu cầu Bedrock cung cấp một số đề xuất sản phẩm bằng cách sử dụng một trong những kịch bản được cung cấp trong phòng thí nghiệm.
+4. Finally, let's ask Bedrock to provide some product recommendations using one of the scripted provided with the lab.
     
-    Truy vấn này sẽ sử dụng OpenSearch làm cơ sở dữ liệu vector để tìm sản phẩm phù hợp nhất với ý định mong muốn của bạn. Nội dung của chỉ mục OpenSearch được tạo thông qua trình kết nối DynamoDB Zero ETL. Khi bản ghi được thêm vào DynamoDB, trình kết nối sẽ tự động di chuyển chúng vào OpenSearch. OpenSearch sau đó sử dụng mô hình Titan Embeddings để trang trí dữ liệu đó.
+    This query will use OpenSearch as a vector database to find the product that most closely matches your desired intent. The contents of the OpenSearch index were created through the DynamoDB Zero ETL connector. When records are added to DynamoDB, the connector automatically moves them into OpenSearch. OpenSearch then uses the Titan Embeddings model to decorate that data.
     
-    Tập lệnh xây dựng một truy vấn tìm kiếm chỉ mục OpenSearch cho các sản phẩm có liên quan nhất đến văn bản nhập của bạn. Điều này được thực hiện bằng cách sử dụng truy vấn "thần kinh", tận dụng các nhúng được lưu trữ trong OpenSearch để tìm các sản phẩm có nội dung văn bản tương tự. Sau khi truy xuất các sản phẩm có liên quan, kịch bản sử dụng Bedrock để tạo ra phản hồi tinh vi hơn thông qua mô hình Claude. Điều này liên quan đến việc tạo một lời nhắc kết hợp truy vấn ban đầu của bạn với dữ liệu đã truy xuất và gửi lời nhắc này đến Bedrock để xử lý.
+    The script constructs a query that searches the OpenSearch index for products that are most relevant to your input text. This is done using a "neural" query, which leverages the embeddings stored in OpenSearch to find products with similar textual content. After retrieving relevant products, the script uses Bedrock to generate a more sophisticated response through the Claude model. This involves creating a prompt that combines your original query with the retrieved data and sending this prompt to Bedrock for processing.
     
-    Trong bảng điều khiển, thực thi tập lệnh python được cung cấp để thực hiện truy vấn đến Bedrock và trả về kết quả sản phẩm.
+    In the console, execute the provided python script to make a query to Bedrock and return product results.
     
     ```bash
     python bedrock_query.py product_recommend en "I need a warm winter coat" $METADATA_AWS_REGION $OPENSEARCH_ENDPOINT $MODEL_ID | jq .
     ```
     
-    ![Kết quả truy vấn](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/ddb-os-zetl17.jpg)
+    ![Query results](/images/2/2.4/1.jpg)
     
-5. Thử thêm một mục mới vào bảng DynamoDB của bạn.
+5. Try adding a new item to your DynamoDB table.
     
     ```bash
     aws dynamodb put-item \
@@ -87,15 +87,14 @@ Tập lệnh xây dựng một truy vấn tìm kiếm chỉ mục OpenSearch cho
         }'
     ```
     
-6. Hãy thử sửa đổi mục tải DynamoDB ở trên để truy xuất mục mới của bạn. Tiếp theo, hãy thử sửa đổi truy vấn OpenSearch để tìm kiếm "Socks" có chứa "Wool". Cuối cùng, nói với Bedrock "Tôi cần vớ ấm để đi bộ đường dài vào mùa đông". Nó có giới thiệu mặt hàng mới của bạn không?
+6. Try modifying the DynamoDB get-item above to retrieve your new item. Next, try modifying the OpenSearch query to search for "Socks" that contain "Wool". Finally, tell Bedrock "I need warm socks for hiking in winter". Did it recommend your new item?
     
 {{%notice tip%}}
-Tiếp tục truy vấn!
-Đừng chỉ dừng lại ở đó với các truy vấn của bạn. Thử yêu cầu quần áo cho mùa đông (nó sẽ giới thiệu các sản phẩm có len?) hoặc trước khi đi ngủ. Lưu ý rằng có một danh mục sản phẩm rất nhỏ cần được nhúng, vì vậy cụm từ tìm kiếm của bạn nên bị giới hạn dựa trên những gì bạn thấy khi đánh giá bảng DynamoDB.
+Keeping querying!
+Don't just stop there with your queries. Trying asking for clothing for winter (will it recommend products with wool?) or for bedtime. Note that there is a very small catalog of products to be embedded, so your search terms should be limited based on what you saw when you reviewed the DynamoDB table.
 {{%/notice%}}
 
-Chúc mừng! Bạn đã hoàn thành phòng thí nghiệm.
-
+Congratulations! You have completed the lab.
 {{%notice warning%}}
-_Nếu chạy trong tài khoản của riêng bạn, hãy nhớ xóa CloudFormation Stack sau khi hoàn thành phòng thực hành để tránh các khoản phí không mong muốn._
+_If running in you own account, remember to delete the CloudFormation Stack after completing the lab to avoid unexpected charges._
 {{%/notice%}}

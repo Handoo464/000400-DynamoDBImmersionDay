@@ -1,0 +1,42 @@
+---
+title : "Retail Cart References"
+date : "`r Sys.Date()`"
+weight : 1
+chapter : false
+pre : " <b> </b> "
+---
+
+## How to tackle this challenge
+
+**What are the access patterns?**
+
+The access patterns in the scenario are:
+
+1. Insert and update items placed in a cart by users.
+2. Return items related to a user (_AccountID_), sorted by _CreateTimestamp_, and scoped to a specific _Status_.
+3. Return items across user by _ItemSKU_, sorted by _CreateTimestamp_, and scoped to a specific _Status_.
+4. Offline ad hoc queries for Business Intelligence team.
+
+Identify possible partition keys to fulfill the primary access pattern:
+
+- What item attribute scales in volume along with higher access?
+- What is a natural organization for the related data items (so as to return collected items relative to the access patterns above)?
+- Consider the dimension of access: both reads and writes.
+
+When determining how to organize items related to the primary access pattern:
+
+- What organization needs to be written to return items in sorted order (sort by)?
+- What is the hierarchy of the relationships (most general to more specific)?
+
+Fulfilling the second, third, and fourth access patterns:
+
+- The second and third access patterns are OLTP access patterns and can be modeled directly in DynamoDB.
+- The fourth access pattern is OLAP and does not need to be fulfilled directly on DynamoDB, or in your solution for that matter.
+#### Helpful references
+
+Given the above, see below for some helpful references.
+
+- **[Best Practices for Using Sort Keys to Organize Data](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-sort-keys.html)** 
+- **[Working with Queries in DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.html)** 
+- **[Using Global Secondary Indexes in DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.html)** 
+- **[How to perform advanced analytics and build visualizations of your Amazon DynamoDB data by using Amazon Athena](https://aws.amazon.com/blogs/database/how-to-perform-advanced-analytics-and-build-visualizations-of-your-amazon-dynamodb-data-by-using-amazon-athena/)**

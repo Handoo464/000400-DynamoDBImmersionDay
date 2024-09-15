@@ -6,16 +6,16 @@ chapter : false
 pre : " <b> 1.5. </b> "
 ---
 
-In this module, also classified as LMIG, you will learn how to design a target data model in DynamoDB for highly normalized relational data in a relational database. The exercise also guides a step by step migration of an IMDb dataset from a self-managed MySQL database instance on EC2 to a fully managed key-value pair database Amazon DynamoDB. At the end of this lesson, you should feel confident in your ability to design and migrate an existing relational database to Amazon DynamoDB.
+Trong module này, còn được phân loại là LMIG, bạn sẽ học cách thiết kế một mô hình dữ liệu mục tiêu trong DynamoDB cho dữ liệu quan hệ được chuẩn hóa cao trong cơ sở dữ liệu quan hệ. Bài tập này cũng hướng dẫn từng bước quá trình di chuyển một bộ dữ liệu IMDb từ một phiên bản cơ sở dữ liệu MySQL tự quản lý trên EC2 sang cơ sở dữ liệu cặp khóa-giá trị được quản lý hoàn toàn, Amazon DynamoDB. Khi kết thúc bài học này, bạn sẽ tự tin vào khả năng thiết kế và di chuyển một cơ sở dữ liệu quan hệ hiện có sang Amazon DynamoDB.
 
-Sometimes data appears to be in a relational format at given point of time, though evolving business requirements cause schema changes over the project lifecycle. Every schema change is labor-intensive, costly and sometimes causes the business to reprioritize their needs due to complicated cascading impacts. Amazon DynamoDB helps IT to rethink the data model in a key-value format. Such a format has the potential to absorb disruption caused by an evolving schema. Amazon DynamoDB offers a fully managed, serverless datastore for information stored in key-value format. Schema flexibility lets DynamoDB store complex hierarchical data within an item and offers single-digit millisecond latency at scale.
+Đôi khi, dữ liệu xuất hiện dưới dạng định dạng quan hệ tại một thời điểm nhất định, nhưng yêu cầu kinh doanh thay đổi có thể gây ra các thay đổi trong schema trong suốt vòng đời dự án. Mỗi thay đổi schema đều tốn công sức, chi phí và đôi khi khiến doanh nghiệp phải ưu tiên lại nhu cầu của họ do các tác động phức tạp của việc thay đổi này. Amazon DynamoDB giúp bộ phận CNTT suy nghĩ lại về mô hình dữ liệu trong định dạng cặp khóa-giá trị. Định dạng này có tiềm năng hấp thụ những gián đoạn do schema thay đổi. Amazon DynamoDB cung cấp một kho dữ liệu không cần quản lý, không máy chủ cho thông tin được lưu trữ dưới dạng cặp khóa-giá trị. Sự linh hoạt về schema cho phép DynamoDB lưu trữ dữ liệu phân cấp phức tạp trong một mục và cung cấp độ trễ chỉ vài mili giây ngay cả khi mở rộng quy mô.
 
-This module will briefly discuss techniques to design a target data model and migrate relational datasets from MySQL to Amazon DynamoDB. IMDb data inside a MySQL database starts out as normalized across multiple tables. We will use denormalized/item collection modelling techniques to create a comprehensive data model for identified access patterns. There are multiple factors that will influence our decisions in building the target data model:
+Module này sẽ thảo luận ngắn gọn về các kỹ thuật để thiết kế mô hình dữ liệu mục tiêu và di chuyển các bộ dữ liệu quan hệ từ MySQL sang Amazon DynamoDB. Dữ liệu IMDb trong cơ sở dữ liệu MySQL bắt đầu dưới dạng chuẩn hóa trên nhiều bảng. Chúng ta sẽ sử dụng các kỹ thuật mô hình hóa dữ liệu phi chuẩn hóa hoặc mô hình hóa bộ sưu tập mục để tạo ra một mô hình dữ liệu toàn diện cho các mẫu truy cập đã xác định. Có nhiều yếu tố sẽ ảnh hưởng đến quyết định của chúng ta trong việc xây dựng mô hình dữ liệu mục tiêu:
 
-- Access patterns
-- Cardinality
-- Overall I/O
+- Mẫu truy cập (Access patterns)
+- Độ đông đúc (Cardinality)
+- Tổng thể I/O
 
-We will briefly discuss the key aspects of creating a model that will serve various access patters with ultralow latency and low I/O and cost.
+Chúng ta sẽ thảo luận ngắn gọn về các khía cạnh chính của việc tạo ra một mô hình có thể phục vụ nhiều mẫu truy cập với độ trễ cực thấp, I/O thấp và chi phí thấp.
 
-![Final Deployment Architecture](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/denormalization.png)
+![Final Deployment Architecture](/images/1/1.5/denormalization.png)

@@ -12,7 +12,7 @@ Amazon DynamoDB offers a zero-ETL integration with Amazon OpenSearch Service thr
     
 2. Click "Create pipeline"
     
-    ![Create pipeline](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/ddb-os-zetl13.jpg)
+    ![Create pipeline](/images/2/2.3/1.jpg)
     
 3. Name your pipeline, and include the following for your pipeline configuration. The configuration contains multiple values that need to be updated. The needed values are provided in the CloudFormation Stack Outputs as "Region", "Role", "S3Bucket", "DdbTableArn", and "OSDomainEndpoint".
     
@@ -98,11 +98,11 @@ Amazon DynamoDB offers a zero-ETL integration with Amazon OpenSearch Service thr
     
 4. Under Network, select "Public access", then click "Next".
     
-    ![Create pipeline](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/ddb-os-zetl14.jpg)
+    ![Create pipeline](/images/2/2.3/2.jpg)
     
 5. Click "Create pipeline".
     
-    ![Create pipeline](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/ddb-os-zetl15.jpg)
+    ![Create pipeline](/images/2/2.3/3.jpg)
     
 6. **Wait until the pipeline has finished creating**. This will take 5 minutes or more.
     
@@ -120,6 +120,6 @@ You may encounter a few types of results:
 - If you see a 404 error of type _index_not_found_exception_, then you need to wait until the pipeline is `Active`. Once it is, this exception will go away.
 - If your query does not have results, wait a few more minutes for the initial replication to finish and try again.
 
-![Create pipeline](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/ddb-os-zetl16.jpg)
+![Create pipeline](/images/2/2.3/4.jpg)
 
 Only continue once you see a return like the above, with a response body. Your hits may vary.

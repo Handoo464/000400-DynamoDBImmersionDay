@@ -6,21 +6,16 @@ chapter : false
 pre : " <b> 1.5. </b> "
 ---
 
-In this step, we will need to create a VPC with 2 public / private subnets. Then create 1 EC2 Instance Linux located in the public subnet, 1 EC2 Instance Windows located in the private subnet.
+In this module, also classified as LMIG, you will learn how to design a target data model in DynamoDB for highly normalized relational data in a relational database. The exercise also guides a step by step migration of an IMDb dataset from a self-managed MySQL database instance on EC2 to a fully managed key-value pair database Amazon DynamoDB. At the end of this lesson, you should feel confident in your ability to design and migrate an existing relational database to Amazon DynamoDB.
 
-The architecture overview after you complete this step will be as follows:
+Sometimes data appears to be in a relational format at given point of time, though evolving business requirements cause schema changes over the project lifecycle. Every schema change is labor-intensive, costly and sometimes causes the business to reprioritize their needs due to complicated cascading impacts. Amazon DynamoDB helps IT to rethink the data model in a key-value format. Such a format has the potential to absorb disruption caused by an evolving schema. Amazon DynamoDB offers a fully managed, serverless datastore for information stored in key-value format. Schema flexibility lets DynamoDB store complex hierarchical data within an item and offers single-digit millisecond latency at scale.
 
-![VPC](/images/arc-01.png)
+This module will briefly discuss techniques to design a target data model and migrate relational datasets from MySQL to Amazon DynamoDB. IMDb data inside a MySQL database starts out as normalized across multiple tables. We will use denormalized/item collection modelling techniques to create a comprehensive data model for identified access patterns. There are multiple factors that will influence our decisions in building the target data model:
 
-To learn how to create EC2 instances and VPCs with public/private subnets, you can refer to the lab:
-  - [About Amazon EC2](https://000004.awsstudygroup.com/en/)
-  - [Works with Amazon VPC](https://000003.awsstudygroup.com/en/)
+- Access patterns
+- Cardinality
+- Overall I/O
 
+We will briefly discuss the key aspects of creating a model that will serve various access patters with ultralow latency and low I/O and cost.
 
-### Content
-  - [Create VPC](2.1.1-createvpc/)
-  - [Create Public Subnet](2.1.2-createpublicsubnet/)
-  - [Create Private Subnet](2.1.3-createprivatesubnet/)
-  - [Create security group](2.1.4-createsecgroup/)
-  - [Create public Linux server](2.1.5-createec2linux/)
-  - [Create private Windows server](2.1.6-createec2windows/)
+![Final Deployment Architecture](/images/1/1.5/denormalization.png)

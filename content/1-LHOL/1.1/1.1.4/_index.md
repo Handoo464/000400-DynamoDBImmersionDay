@@ -6,7 +6,6 @@ chapter : false
 pre : " <b> 1.1.4. </b> "
 ---
 
-
 If you used an account provided by Workshop Studio Event Delivery, you do not need to do any cleanup. The account terminates when the event is over.
 
 If you used your own account, please remove the following resources:

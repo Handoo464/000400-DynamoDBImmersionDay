@@ -11,7 +11,7 @@ Chương này sẽ tạo môi trường nguồn trên AWS như đã thảo luậ
 
 1. Khởi chạy mẫu CloudFormation ở US West 2 để triển khai các tài nguyên trong tài khoản của bạn: [![Sự hình thành đám mây](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/new?stackName=rdbmsmigration&templateURL=https://s3.amazonaws.com/amazon-dynamodb-labs.com/assets/migration-env-setup.yaml)
     1. _Tùy chọn, tải xuống [mẫu YAML](https://s3.amazonaws.com/amazon-dynamodb-labs.com/assets/migration-env-setup.yaml)  và khởi chạy nó theo cách riêng của bạn_
-2. Nhấp vào Tiếp theo
+2. Nhấp vào Next
 3. Xác nhận Tên ngăn xếp _rdbmsmigration_ và cập nhật các tham số nếu cần (để lại các tùy chọn mặc định nếu có thể) ![Kiến trúc triển khai cuối cùng](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/migration6.jpg)
 4. Nhấp vào "Tiếp theo" hai lần, sau đó chọn "Tôi xác nhận rằng AWS CloudFormation có thể tạo tài nguyên IAM có tên tùy chỉnh".
 5. Nhấp vào "Gửi"

@@ -9,7 +9,7 @@ pre : " <b> 1.5.7. </b> "
 Amazon DynamoDB supports [PartiQL](https://partiql.org/) , a SQL-compatible query language, to select, insert, update, and delete data in Amazon DynamoDB. Using PartiQL, you can easily interact with DynamoDB tables and run ad hoc queries using the AWS Management Console. In this exercise, we will hands-on a few access patterns using PartiQL statements.
 
 1. Login to [DynamoDB console](https://console.aws.amazon.com/dynamodbv2/home)  and select PartiQL editor from left navigation.
-2. Select movies table that was created and loaded by the Database Migration Service job. Select ellipsis next to the table name and click on the scan table. ![Final Deployment Architecture](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/migration28.jpg) We will use PartiQL scripts to demonstrate all 6 access patterns discussed at previous chapter. For our example we will provide you the partition key values, but in real life you will need to make an index of keys perhaps using a GSI. Get details by the movie: Each IMDB movie has a unique tconst. The denormalized table is created with each row representing a unique combination of movie and crew i.e. tconst and nconst. Since tconst is part of the partition key for the base table, it can use under WHERE conditions to select the details. Copy below command to run inside PartiQL query editor. ![Final Deployment Architecture](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/migration35.png)
+2. Select movies table that was created and loaded by the Database Migration Service job. Select ellipsis next to the table name and click on the scan table. ![Final Deployment Architecture](/images/1/1.5/28.jpg) We will use PartiQL scripts to demonstrate all 6 access patterns discussed at previous chapter. For our example we will provide you the partition key values, but in real life you will need to make an index of keys perhaps using a GSI. Get details by the movie: Each IMDB movie has a unique tconst. The denormalized table is created with each row representing a unique combination of movie and crew i.e. tconst and nconst. Since tconst is part of the partition key for the base table, it can use under WHERE conditions to select the details. Copy below command to run inside PartiQL query editor. ![Final Deployment Architecture](/images/1/1.5/29.png)
 
 - Find all the cast and crew worked in a movie. Below query will include actor, actress, producer, cinematographer etc. worked in a given movie.
 
@@ -66,7 +66,7 @@ To access information at the crew member level (#6 in the access pattern), we ne
 |Data type|String|
 |Attribute projections|All|
 
-![Final Deployment Architecture](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/migration29.jpg) ![Final Deployment Architecture](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/migration30.jpg)
+![Final Deployment Architecture](/images/1/1.5/30.jpg) ![Final Deployment Architecture](/images/1/1.5/31.jpg)
 
 5. Finally, click on Create Index. This may take an hour depending on the number of records in the base table.
 6. Once the GSI status columns change from Pending to Available, go back to the PartiQL editor to execute a query on GSI.

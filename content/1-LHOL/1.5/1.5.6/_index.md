@@ -6,72 +6,74 @@ chapter : false
 pre : " <b> 1.5.6. </b> "
 ---
 
-Trong bài tập này, chúng ta sẽ thiết lập các tác vụ Database Migration Service (DMS) để di chuyển dữ liệu từ cơ sở dữ liệu MySQL nguồn (quan hệ view, bảng) sang Amazon DynamoDB.
+In this exercise, we will set up Database Migration Service (DMS) jobs to migrate data from source MySQL database (relational view, tables) to Amazon DynamoDB.
 
-## Xác minh việc tạo DMS
+## Verify DMS creation
 
-1. Đi tới [Bảng điều khiển DMS](https://console.aws.amazon.com/dms/v2/home?region=us-east-1#dashboard)  và nhấp vào Phiên bản sao chép. Bạn có thể xem phiên bản sao chép với Lớp dms.c5.2xlarge ở Trạng thái khả dụng. ![Kiến trúc triển khai cuối cùng](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/migration20.jpg)
+1. Go to [DMS Console](https://console.aws.amazon.com/dms/v2/home?region=us-east-1#dashboard)  and click on Replication Instances. You can able to see a replication instance with Class dms.c5.2xlarge in Available Status. ![Final Deployment Architecture](/images/1/1.5/19.jpg)
+
 {{%notice tip%}}
-_Đảm bảo phiên bản DMS có sẵn trước khi bạn tiếp tục. Nếu nó không khả dụng, hãy quay lại bảng điều khiển CloudFormation để xem lại và khắc phục sự cố ngăn xếp CloudFormation._
+_Make sure the DMS instance is Available before you continue. If it is not Available, return to the CloudFormation console to review and troubleshoot the CloudFormation stack._
 {{%/notice%}}
 
-## Tạo điểm cuối nguồn và đích
+## Create source and target endpoints
 
 
-1. Nhấp vào nút Điểm cuối và Tạo điểm cuối ![Kiến trúc triển khai cuối cùng](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/migration21.jpg)
+1. Click on Endpoints and Create endpoint button ![Final Deployment Architecture](/images/1/1.5/20.jpg)
     
-2. Tạo điểm cuối nguồn. Sử dụng các tham số sau để đặt cấu hình điểm cuối:
+2. Create the source endpoint. Use the following parameters to configure the endpoint:
     
-    |Thông số|Giá trị|
+    |Parameter|Value|
     |---|---|
-    |Loại điểm cuối|Điểm cuối nguồn|
-    |Mã định danh điểm cuối|điểm cuối mysql|
-    |Công cụ nguồn|MySQL|
-    |Truy cập vào cơ sở dữ liệu điểm cuối|Chọn nút radio "Cung cấp thông tin truy cập theo cách thủ công"|
-    |Tên máy chủ|Từ [Bảng thông tin EC2](https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#Instances:instanceState=running) , chọn MySQL-Instance và sao chép DNS IPv4 công cộng|
-    |Cảng|3306|
-    |Chế độ SSL|không ai|
-    |Tên người dùng|Giá trị của DbMasterUsername được thêm vào dưới dạng tham số trong khi Định cấu hình môi trường MySQL|
-    |Mật khẩu|Giá trị của DbMasterPassword được thêm vào dưới dạng tham số trong quá trình Định cấu hình môi trường MySQL|
+    |Endpoint type|Source endpoint|
+    |Endpoint identifier|mysql-endpoint|
+    |Source engine|MySQL|
+    |Access to endpoint database|Select the "Provide access information manually" radio button|
+    |Server name|From the [EC2 dashboard](https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#Instances:instanceState=running) , select MySQL-Instance and copy Public IPv4 DNS|
+    |Port|3306|
+    |SSL mode|none|
+    |User name|Value of DbMasterUsername added as parameter during Configure MySQL Environment|
+    |Password|Value of DbMasterPassword added as parameter during Configure MySQL Environment|
     
-    ![Kiến trúc triển khai cuối cùng](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/migration22.jpg) Mở mục Test endpoint connection (optional), sau đó trong menu thả xuống VPC, chọn DMS-VPC và nhấp vào nút Run test để xác minh rằng cấu hình điểm cuối của bạn là hợp lệ. Thử nghiệm sẽ chạy trong một phút và bạn sẽ thấy thông báo thành công trong cột Trạng thái. Nhấp vào nút Tạo điểm cuối để tạo điểm cuối. Nếu bạn thấy lỗi kết nối, hãy nhập lại tên người dùng và mật khẩu để đảm bảo không có lỗi nào xảy ra. Hơn nữa, hãy đảm bảo bạn đã cung cấp tên DNS IPv4 kết thúc bằng amazonaws.com trong trường **Tên máy chủ**. ![Kiến trúc triển khai cuối cùng](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/migration23.jpg)
+    ![Final Deployment Architecture](/images/1/1.5/21.jpg) Open Test endpoint connection (optional) section, then in the VPC drop-down select DMS-VPC and click the Run test button to verify that your endpoint configuration is valid. The test will run for a minute and you should see a successful message in the Status column. Click on the Create endpoint button to create the endpoint. If you see a connection error, re-type the username and password to ensure no mistakes were made. Further, ensure you provided the IPv4 DNS name ending in amazonaws.com in the field **Server name**. ![Final Deployment Architecture](/images/1/1.5/22.jpg)
     
-3. Tạo điểm cuối đích. Lặp lại tất cả các bước để tạo điểm cuối đích với các giá trị tham số sau:
+3. Create the target endpoint. Repeat all steps to create the target endpoint with the following parameter values:
     
-    |Thông số|Giá trị|
+    |Parameter|Value|
     |---|---|
-    |Loại điểm cuối|Điểm cuối mục tiêu|
-    |Mã định danh điểm cuối|điểm cuối dynamoDB|
-    |Động cơ mục tiêu|Amazon DynamoDB|
-    |Vai trò truy cập dịch vụ ARN|Mẫu CloudFormation đã tạo vai trò mới với toàn quyền truy cập vào Amazon DynamoDB. Sao chép ARN vai trò từ [Truy cập DynamoDB](https://us-east-1.console.aws.amazon.com/iamv2/home#/roles/details/dynamodb-access?section=permissions)  vai trò|
+    |Endpoint type|Target endpoint|
+    |Endpoint identifier|dynamodb-endpoint|
+    |Target engine|Amazon DynamoDB|
+    |Service access role ARN|CloudFormation template has created new role with full access to Amazon DynamoDB. Copy Role ARN from [dynamodb-access](https://us-east-1.console.aws.amazon.com/iamv2/home#/roles/details/dynamodb-access?section=permissions)  role|
     
-    ![Kiến trúc triển khai cuối cùng](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/migration24.jpg) Mở mục Test endpoint connection (optional), sau đó trong menu thả xuống VPC, chọn DMS-VPC và nhấp vào nút Run test để xác minh rằng cấu hình điểm cuối của bạn là hợp lệ. Thử nghiệm sẽ chạy trong một phút và bạn sẽ thấy thông báo thành công trong cột Trạng thái. Nhấp vào nút Tạo điểm cuối để tạo điểm cuối.
+    ![Final Deployment Architecture](/images/1/1.5/23.jpg) Open Test endpoint connection (optional) section, then in the VPC drop-down select DMS-VPC and click the Run test button to verify that your endpoint configuration is valid. The test will run for a minute and you should see a successful message in the Status column. Click on the Create endpoint button to create the endpoint.
     
 
-## Cấu hình và chạy tác vụ sao chép
+## Configure and Run a Replication Task
 
-Vẫn trong bảng điều khiển AWS DMS, hãy chuyển đến Tác vụ di chuyển cơ sở dữ liệu và nhấp vào nút Tạo tác vụ. Chúng tôi sẽ tạo 3 tác vụ sao chép để di chuyển thông tin chế độ xem, xếp hạng (title_ratings) và khu vực/ngôn ngữ (title_akas) không chuẩn hóa.
 
-1. Nhiệm vụ 1: Nhập các giá trị tham số sau vào Tạo tác vụ di chuyển cơ sở dữ liệu màn:
+Still in the AWS DMS console, go to Database migration tasks and click the Create Task button. We will create 3 replication jobs to migrate denormalized view, ratings (title_ratings) and regions/languages (title_akas) information.
+
+1. Task1: Enter the following parameter values in the Create database migration task screen:
     
-    |Thông số|Giá trị|
+    |Parameter|Value|
     |---|---|
-    |Nhiệm vụ đã xác định|lịch sử-di cư01|
-    |Phiên bản sao chép|mysqltodynamodb-instance-*|
-    |Điểm cuối cơ sở dữ liệu nguồn|điểm cuối mysql|
-    |Điểm cuối cơ sở dữ liệu đích|điểm cuối dynamoDB|
-    |Loại di chuyển|Di chuyển dữ liệu hiện có|
-    |Cài đặt tác vụ: Chế độ chỉnh sửa|Thuật sĩ|
-    |Cài đặt tác vụ: Chế độ chuẩn bị bảng mục tiêu|Không làm gì cả|
-    |Cài đặt tác vụ: Bật nhật ký CloudWatch|Kiểm tra|
-    |Ánh xạ bảng: Chế độ chỉnh sửa|Chọn tùy chọn trình chỉnh sửa JSON và làm theo hướng dẫn sau ảnh chụp màn hình bên dưới|
+    |Task identified|historical-migration01|
+    |Replication instance|mysqltodynamodb-instance-*|
+    |Source database endpoint|mysql-endpoint|
+    |Target database endpoint|dynamodb-endpoint|
+    |Migration type|Migrate existing data|
+    |Task settings: Editing mode|Wizard|
+    |Task settings: Target table preparation mode|Do nothing|
+    |Task settings: Turn on CloudWatch logs|Checked|
+    |Table mappings: Editing mode|Select JSON editor option and follow the instructions after below screenshots|
     
 
-![Kiến trúc triển khai cuối cùng](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/migration25.jpg) ![Kiến trúc triển khai cuối cùng](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/migration26.jpg)
+![Final Deployment Architecture](/images/1/1.5/24.jpg) ![Final Deployment Architecture](/images/1/1.5/25.jpg)
 
-Bắt đầu với phần trình soạn thảo JSON mở trong trình duyệt của bạn. Trong phần này, chúng ta sẽ tạo tài liệu Table mappings JSON để thay thế những gì bạn thấy trong trình soạn thảo JSON. Tài liệu này bao gồm ánh xạ từ nguồn đến đích, bao gồm bất kỳ chuyển đổi nào trên các bản ghi sẽ được thực hiện trong quá trình di chuyển. Để giảm thời gian tải trong Immersion Day, chúng tôi đã thu hẹp danh sách di chuyển thành phim chọn lọc. Dưới đây là tài liệu JSON có danh sách 28 bộ phim được thực hiện bởi Clint Eastwood. Bài tập còn lại sẽ chỉ tập trung vào những bộ phim này. Tuy nhiên, hãy thoải mái tải dữ liệu còn lại trong trường hợp bạn muốn khám phá thêm. Một số thống kê xung quanh tập dữ liệu đầy đủ được đưa ra ở cuối chương này.
+Start with the JSON editor section open in your browser. In this section we will create Table mappings JSON document to replace what you see in the JSON editor. This document includes source to target mapping including any transformation on the records that will be performed during migration. To reduce the loading time during Immersion Day, we have narrowed down the migration list to selective movies. Below JSON document has list of 28 movies worked by Clint Eastwood. The remaining exercise will just focus on these movies. However, feel free to load remaining data in case you like to further explore. Some statistics around full dataset is give at the bottom of this chapter.
 
-Sao chép danh sách các bộ phim chọn lọc của Clint Eastwood.
+Copy list of selective movies by Clint Eastwood.
 
 ```
     {
@@ -176,7 +178,7 @@ Sao chép danh sách các bộ phim chọn lọc của Clint Eastwood.
     }
 ```
 
-Bên dưới tài liệu JSON sẽ di chuyển chế độ xem không chuẩn hóa từ cơ sở dữ liệu mySQL imdb (Tác vụ được xác định: lịch sử-migration01). Thay thế chuỗi "THAY THẾ CHUỖI NÀY BẰNG DANH SÁCH PHIM" bằng danh sách phim được sao chép trước đó (Kiểm tra sau ảnh chụp màn hình cho bất kỳ sự nhầm lẫn nào). Sau đó dán mã JSON kết quả vào trình soạn thảo JSON, thay thế mã hiện có.
+Below JSON document will migrate denormalized view from imdb MySQL database (Task identified: historical-migration01). Replace the string “REPLACE THIS STRING BY MOVIES LIST” with list of movies copied earlier (Checkout following screenshot for any confusion). Then paste the resulting JSON code in to the JSON editor, replacing the existing code.
 
 ```json
 {
@@ -234,9 +236,9 @@ Bên dưới tài liệu JSON sẽ di chuyển chế độ xem không chuẩn h�
 }
 ```
 
-![Kiến trúc triển khai cuối cùng](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/migration36.png) Chuyển xuống dưới cùng và nhấp vào Tạo tác vụ. Tại thời điểm này, tác vụ sẽ được tạo và sẽ tự động bắt đầu tải các phim đã chọn từ nguồn vào bảng DynamoDB đích. Bạn có thể tiếp tục và tạo thêm hai tác vụ với các bước tương tự (history-migration02 và history-migration03). Sử dụng các cài đặt tương tự như trên ngoại trừ tài liệu JSON ánh xạ bảng. Đối với các tác vụ di cư lịch sử02 và di cư lịch sử03, hãy sử dụng tài liệu JSON được đề cập bên dưới.
+![Final Deployment Architecture](/images/1/1.5/26.png) Go to the bottom and click on Create task. At this point the task will be created and will automatically start loading selected movies from source to target DynamoDB table. You can move forward and create two more tasks with similar steps (historical-migration02 and historical-migration03). Use the same settings as above except the Table Mappings JSON document. For historical-migration02 and historical-migration03 tasks use the JSON document mentioned below.
 
-Dưới đây tài liệu JSON sẽ di chuyển bảng title_akas từ cơ sở dữ liệu mySQL imdb (Tác vụ được xác định: lịch sử-migration02) Thay thế chuỗi "REPLACE THIS STRING BY MOVIES LIST" bằng danh sách phim đã sao chép trước đó.
+Below JSON document will migrate title_akas table from imdb MySQL database (Task identified: historical-migration02) Replace the string "REPLACE THIS STRING BY MOVIES LIST" with list of movies copied earlier.
 
 ```json
 {
@@ -294,7 +296,7 @@ Dưới đây tài liệu JSON sẽ di chuyển bảng title_akas từ cơ sở 
 }
 ```
 
-Dưới đây tài liệu JSON sẽ di chuyển bảng title_ratings từ cơ sở dữ liệu mySQL imdb (Nhiệm vụ được xác định: lịch sử-di chuyển03) Thay thế chuỗi "REPLACE THIS STRING BY MOVIES LIST" bằng danh sách phim đã sao chép trước đó.
+Below JSON document will migrate title_ratings table from imdb MySQL database (Task identified: historical-migration03) Replace the string "REPLACE THIS STRING BY MOVIES LIST" with list of movies copied earlier.
 
 ```json
 {
@@ -352,27 +354,25 @@ Dưới đây tài liệu JSON sẽ di chuyển bảng title_ratings từ cơ s�
 }
 ```
 
-#### Giải pháp
+#### Solutions
 
+If you are having trouble with making the JSON documents for the tasks, expand this section to get the solutions!
+- [First Task - historical-migration01](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/files/hands-on-labs/Task_1.json) 
+- [Second Task - historical-migration02](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/files/hands-on-labs/Task_2.json) 
+- [Third Task - historical-migration03](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/files/hands-on-labs/Task_3.json)
+### Monitor and the restart/resume the tasks
 
-Nếu bạn gặp sự cố khi tạo tài liệu JSON cho các tác vụ, hãy mở rộng phần này để có giải pháp!
-- [Nhiệm vụ đầu tiên - lịch sử-di cư01](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/files/hands-on-labs/Task_1.json) 
-- [Nhiệm vụ thứ hai - lịch sử-di cư02](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/files/hands-on-labs/Task_2.json) 
-- [Nhiệm vụ thứ ba - lịch sử-di cư03](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/files/hands-on-labs/Task_3.json)
+The replication task for historical migration will start moving data from MySQL imdb.movies view, title_akas and title_ratings to DynamoDB table will start in a few minutes. If you are loading selective records based on the list above, it may take 5-10 minutes to complete all three tasks.
 
-### Giám sát và khởi động lại / tiếp tục các tác vụ
+If you were to run this exercise again but do a full load, the load times would be as follows:
 
+- historical-migration01 task will migrate 800K+ records and normally takes 2-3 Hrs.
+- historical-migration02 task will migrate 747K+ records and normally takes 2-3 Hrs.
+- historical-migration03 task will migrate 79K+ records and normally takes 10-15 Minutes.
 
-Tác vụ sao chép cho di chuyển lịch sử sẽ bắt đầu di chuyển dữ liệu từ MySQL imdb.movies view, title_akas và title_ratings sang bảng DynamoDB sẽ bắt đầu sau vài phút. Nếu bạn đang tải các bản ghi chọn lọc dựa trên danh sách trên, có thể mất 5-10 phút để hoàn thành cả ba tác vụ.
-
-Nếu bạn chạy lại bài tập này nhưng thực hiện tải đầy đủ, thời gian tải sẽ như sau:
-
-- tác vụ history-migration01 sẽ di chuyển 800K + bản ghi và thường mất 2-3 giờ.
-- tác vụ history-migration02 sẽ di chuyển các bản ghi 747K + và thường mất 2-3 giờ.
-- tác vụ history-migration03 sẽ di chuyển 79K + bản ghi và thường mất 10-15 phút.
-
-Bạn có thể theo dõi trạng thái tải dữ liệu trong Bảng thống kê của tác vụ di chuyển. Sau khi tải đang diễn ra, vui lòng chuyển sang phần tiếp theo của bài tập. ![Kiến trúc triển khai cuối cùng](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/migration27.jpg)
+You can track the status of data loading under the Table statistics of the migration task. Once loading is in progress, feel free to move to the next section of the exercise. ![Final Deployment Architecture](/images/1/1.5/27.jpg)
 
 {{%notice tip%}}
-_Đảm bảo rằng tất cả các tác vụ đang chạy hoặc hoàn thành trước khi bạn tiếp tục. Nếu một tác vụ cho biết **Sẵn sàng**, hãy chọn hộp của nó và chọn "Khởi động lại / Tiếp tục" dưới nút Hành động để bắt đầu tác vụ._
+_Make sure all tasks are running or complete before you continue. If a task says **Ready**, check its box and choose "Restart/Resume" under the Actions button to start the task._
 {{%/notice%}}
+

@@ -6,22 +6,21 @@ chapter : false
 pre : " <b> 1.2.1. </b> "
 ---
 
+Trước khi có thể làm bất cứ điều gì, chúng ta cần tìm hiểu về cấu trúc dữ liệu của mình.
 
-Trước khi chúng ta làm bất cứ điều gì, chúng ta cần phải hiểu dữ liệu của mình trông như thế nào.
-
-DynamoDB cung cấp [Scan API](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Scan.html), có thể được gọi bằng lệnh [scan CLI command](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/scan.html). Scan sẽ thực hiện quét toàn bộ bảng và trả về các mục theo từng khối 1MB. Quét là cách chậm nhất và tốn kém nhất để lấy dữ liệu từ DynamoDB; việc quét trên một bảng lớn từ CLI có thể không thuận tiện, nhưng chúng ta biết rằng chỉ có một vài mục trong dữ liệu mẫu của chúng ta, vì vậy việc làm này ở đây là chấp nhận được. Hãy thử chạy lệnh quét trên bảng ProductCatalog:
+DynamoDB cung cấp [API Scan](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Scan.html) mà bạn có thể gọi bằng [lệnh CLI scan](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/scan.html). Lệnh Scan sẽ quét toàn bộ bảng và trả về các mục dữ liệu theo từng khối 1MB. Việc quét bảng là cách chậm nhất và tốn kém nhất để lấy dữ liệu ra khỏi DynamoDB; quét một bảng lớn từ CLI có thể sẽ rất phức tạp, nhưng chúng ta biết rằng trong dữ liệu mẫu của chúng ta chỉ có một vài mục, nên có thể thực hiện điều này ở đây. Hãy thử chạy lệnh quét trên bảng ProductCatalog:
 
 ```bash
 aws dynamodb scan --table-name ProductCatalog
 ```
 
-Sử dụng các phím mũi tên để di chuyển lên và xuống qua phản hồi Scan. Hãy gõ `:q` và nhấn Enter để thoát khỏi trình xem khi bạn đã xem xong phản hồi.
+Sử dụng các phím mũi tên để di chuyển lên và xuống qua phản hồi của lệnh **_Scan_**. **Nhập `:q` và nhấn Enter để thoát khỏi chế độ xem** khi bạn đã hoàn thành việc xem phản hồi.
 
-Đầu vào và đầu ra dữ liệu trong CLI sử dụng định dạng JSON của DynamoDB, được mô tả trong phần [DynamoDB Low-Level API](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.LowLevelAPI.html) trong Developer Guide.
+Việc nhập và xuất dữ liệu trong CLI sử dụng định dạng JSON của DynamoDB, được mô tả trong phần [API Cấp thấp của DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.LowLevelAPI.html) trong Hướng dẫn Dành cho Nhà Phát triển.
 
-Chúng ta có thể thấy từ dữ liệu rằng bảng ProductCatalog này có hai loại sản phẩm: Sách và Xe đạp.
+Chúng ta có thể thấy từ dữ liệu của mình rằng bảng ProductCatalog có hai loại sản phẩm: các mục Sách (Book) và Xe đạp (Bicycle).
 
-Nếu chúng ta chỉ muốn đọc một mục cụ thể, chúng ta sẽ sử dụng  [GetItem API](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_GetItem.html), có thể được gọi bằng [get-item CLI command](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/get-item.html). GetItem là cách nhanh nhất và rẻ nhất để lấy dữ liệu từ DynamoDB vì bạn phải chỉ định toàn bộ Khóa Chính, vì vậy lệnh này đảm bảo sẽ khớp với tối đa một mục trong bảng.
+Nếu chúng ta muốn đọc chỉ một mục, chúng ta sẽ sử dụng [API GetItem](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_GetItem.html) mà có thể gọi bằng [lệnh CLI get-item](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/get-item.html). GetItem là cách nhanh nhất và rẻ nhất để lấy dữ liệu ra khỏi DynamoDB vì bạn phải chỉ định đầy đủ Khóa Chính, do đó lệnh được đảm bảo chỉ khớp với tối đa một mục trong bảng.
 
 ```bash
 aws dynamodb get-item \
@@ -29,15 +28,15 @@ aws dynamodb get-item \
     --key '{"Id":{"N":"101"}}'
 ```
 
-Theo mặc định, một lần đọc từ DynamoDB sẽ sử dụng tính nhất quán cuối cùng (_eventual consistency_), vì các lần đọc nhất quán cuối cùng trong DynamoDB có giá chỉ bằng một nửa so với một lần đọc nhất quán mạnh(*strongly consistent*). Xem phần  [Read Consistency](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html) trong DynamoDB Developer Guide để biết thêm thông tin.
+Mặc định, một lần đọc từ DynamoDB sẽ sử dụng **đọc nhất quán cuối cùng** (eventual consistency) vì các lần đọc nhất quán cuối cùng trong DynamoDB có giá chỉ bằng một nửa so với lần đọc **nhất quán mạnh** (strongly consistent). Xem thêm thông tin về [Tính nhất quán của lần đọc](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html) trong Hướng dẫn Dành cho Nhà Phát triển DynamoDB.
 
-Có nhiều tùy chọn hữu ích cho lệnh `get-item`, nhưng một số tùy chọn thường được sử dụng là:
+Có nhiều tùy chọn hữu ích cho lệnh get-item, nhưng một số tùy chọn được sử dụng thường xuyên là:
 
-- `--consistent-read`: Chỉ định rằng bạn muốn một lần đọc nhất quán mạnh
-- `--projection-expression`: Chỉ định rằng bạn chỉ muốn một số thuộc tính nhất định được trả về trong yêu cầu
-- `--return-consumed-capacity`: Cho biết dung lượng đã được tiêu thụ bởi yêu cầu
+- **--consistent-read**: Xác định rằng bạn muốn đọc nhất quán mạnh.
+- **--projection-expression**: Xác định rằng bạn chỉ muốn trả về một số thuộc tính nhất định trong yêu cầu.
+- **--return-consumed-capacity**: Cho biết mức dung lượng đã được tiêu thụ bởi yêu cầu.
 
-Hãy chạy lệnh trước đó và thêm một số tùy chọn này vào dòng lệnh:
+Hãy chạy lại lệnh trước đó và thêm một số tùy chọn này vào dòng lệnh:
 
 ```bash
 aws dynamodb get-item \
@@ -70,7 +69,7 @@ Chúng ta có thể thấy từ các giá trị trả về:
 }
 ```
 
-Việc thực hiện yêu cầu này tiêu tốn 1.0 RCU, bởi vì mục này có kích thước nhỏ hơn 4KB. Nếu chúng ta chạy lại lệnh nhưng bỏ tùy chọn `--consistent-read`, chúng ta sẽ thấy rằng các lần đọc nhất quán cuối cùng sẽ tiêu tốn một nửa dung lượng:
+Rằng việc thực hiện yêu cầu này tiêu thụ 1.0 RCU, vì mục này nhỏ hơn 4KB. Nếu chúng ta chạy lại lệnh mà loại bỏ tùy chọn *--consistent-read*, chúng ta sẽ thấy rằng các lần đọc nhất quán cuối cùng tiêu thụ dung lượng chỉ bằng một nửa:
 
 ```bash
 aws dynamodb get-item \
@@ -80,7 +79,7 @@ aws dynamodb get-item \
     --return-consumed-capacity TOTAL
 ```
 
-Chúng ta sẽ thấy đầu ra này:
+Chúng ta sẽ thấy kết quả đầu ra này:
 
 ```json
 {
@@ -100,3 +99,4 @@ Chúng ta sẽ thấy đầu ra này:
         "CapacityUnits": 0.5
     }
 }
+```

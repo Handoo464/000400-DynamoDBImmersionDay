@@ -1,86 +1,87 @@
 ---
-title : "Scheduled Backup"
+title : "Sao lưu theo lịch"
 date : "`r Sys.Date()`"
 weight : 4
 chapter : false
 pre : " <b> 1.4.4. </b> "
 ---
 
-Bạn phải tạo ít nhất một kho lưu trữ (vault) trước khi tạo kế hoạch sao lưu hoặc bắt đầu một công việc sao lưu.
+**Sao lưu theo yêu cầu**
 
-1. Ở AWS Management Console, điều hướng tới **Services -> AWS Backup.** Chọn **Create Backup vault** dưới **Backup vaults**.
+Bạn phải tạo ít nhất một vault (kho lưu trữ) trước khi tạo một kế hoạch sao lưu hoặc bắt đầu một công việc sao lưu.
 
-![Scheduled Backup 1](/images/1/1.4/13.png)
+1. Trong AWS Management Console, điều hướng đến **Services -> AWS Backup**. Nhấp vào **Create Backup vault** dưới **Backup vaults**.
 
-2. Cung cấp tên Backup vault tùy chọn. AWS KMS encryption master key. By default, AWS Backup tạo master key with alias aws/backup cho bạn. Bạn có thể chọn khóa đó hoặc chọn bất kỳ khóa nào khác trong tài khoản của bạn. Nhấp vào **Create Backup vault**
+![Sao lưu theo lịch trình 1](/images/1/1.4/1.4.4/1.png)
 
-![Scheduled Backup 2](/images/1/1.4/14.png)
+2. Cung cấp tên Backup vault theo ý muốn của bạn. AWS KMS encryption master key (khóa chính mã hóa AWS KMS). Mặc định, AWS Backup sẽ tạo một khóa chính với bí danh aws/backup cho bạn. Bạn có thể chọn khóa đó hoặc chọn bất kỳ khóa nào khác trong tài khoản của bạn. Nhấp vào **Create Backup vault**.
 
-Bạn có thể thấy kho sao lưu đã được tạo thành công.
+![Sao lưu theo lịch trình 2](/images/1/1.4/1.4.4/2.png)
 
-![Scheduled Backup 3](/images/1/1.4/15.png)
+Bạn có thể thấy Backup vault đã được tạo thành công.
 
-Bây giờ, chúng ta cần tạo kế hoạch sao lưu.
+![Sao lưu theo lịch trình 3](/images/1/1.4/1.4.4/3.png)
 
-3. Nhấp vào **Create Backup plan** dưới **Backup plans**.
+Bây giờ, chúng ta cần tạo một kế hoạch sao lưu.
 
-![Scheduled Backup 4](/images/1/1.4/16.png)
+3. Nhấp vào **Create Backup plan** dưới **Backup plans**.
 
-4. Chọn **Build a new plan**. Cung cấp **backup plan name** và **rule name**.
+![Sao lưu theo lịch trình 4](/images/1/1.4/1.4.4/4.png)
 
-![Scheduled Backup 5](/images/1/1.4/17.png)
+4. Chọn **Build a new plan**. Cung cấp **backup plan name** và **rule name**.
 
-5. Chọn **backup frequency.** Tần suất sao lưu xác định tần suất sao lưu được tạo. Sử dụng giao diện, bạn có thể chọn **frequency** of every 12 hours, daily, weekly, hoặc monthly. Chọn **backup window**. Backup window bao gồm thời gian bắt đầu và thời gian kéo dài của khoảng thời gian tính bằng giờ. Ta đang cấu hình sao lưu bắt đầu lúc 6 giờ chiều UTC, bắt đầu trong vòng 1 giờ và hoàn thành trong vòng 4 giờ.
-    
-    Thêm vào đó, chọn **lifecycle**. Vòng đời xác định khi nào một bản sao lưu được chuyển sang lưu trữ lạnh và khi nào nó hết hạn. Tôi đang cấu hình sao lưu để chuyển sang lưu trữ lạnh sau 31 ngày và hết hạn sau 366 ngày.
-    
+![Sao lưu theo lịch trình 5](/images/1/1.4/1.4.4/5.png)
 
-![Scheduled Backup 6](/images/1/1.4/18.png)
+5. Chọn **backup frequency** (tần suất sao lưu). Tần suất sao lưu xác định mức độ thường xuyên tạo một bản sao lưu. Sử dụng giao diện điều khiển, bạn có thể chọn **frequency** là mỗi 12 giờ, hàng ngày, hàng tuần, hoặc hàng tháng. Chọn **backup window** (cửa sổ sao lưu). Cửa sổ sao lưu bao gồm thời gian bắt đầu sao lưu và thời gian của cửa sổ tính bằng giờ. Công việc sao lưu sẽ bắt đầu trong cửa sổ này. Tôi đang cấu hình sao lưu bắt đầu vào lúc 6 giờ chiều UTC trong vòng 1 giờ và hoàn thành trong vòng 4 giờ.
 
-6. Chọn **backup vault** mà chúng ta đã tạo trước đó. Nhấp vào **Create plan**.
+   Tiếp theo, chọn **lifecycle** (vòng đời). Vòng đời xác định khi nào một bản sao lưu được chuyển sang lưu trữ lạnh và khi nào nó hết hạn. Tôi đang cấu hình sao lưu để chuyển sang lưu trữ lạnh sau 31 ngày và hết hạn sau 366 ngày.
 
-![Scheduled Backup 7](/images/1/1.4/19.png)
+![Sao lưu theo lịch trình 6](/images/1/1.4/1.4.4/6.png)
 
-_Note: Bản sao lưu được chuyển sang lưu trữ lạnh phải được lưu trữ ở đó trong tối thiểu 90 ngày.
+6. Chọn **backup vault** mà chúng ta đã tạo trước đó. Nhấp vào **Create plan**.
 
-Bây giờ, gán tài nguyên cho kế hoạch sao lưu. Khi bạn gán một tài nguyên cho kế hoạch sao lưu, tài nguyên đó sẽ được sao lưu tự động theo kế hoạch sao lưu.
+![Sao lưu theo lịch trình 7](/images/1/1.4/1.4.4/7.png)
 
-7. Cung cấp tên gán tài nguyên. Chọn vai trò mặc định. Chọn **Include specific resource types** dưới "1. Xác định lựa chọn tài nguyên"
+_Lưu ý: Các bản sao lưu được chuyển sang lưu trữ lạnh phải được lưu trữ trong lưu trữ lạnh ít nhất 90 ngày._
 
-![Scheduled Backup 8](/images/1/1.4/20.png)
+Bây giờ, hãy gán tài nguyên cho kế hoạch sao lưu. Khi bạn gán một tài nguyên cho một kế hoạch sao lưu, tài nguyên đó sẽ được sao lưu tự động theo kế hoạch sao lưu.
 
-8. Dưới "2. Chọn các loại tài nguyên cụ thể", chọn loại tài nguyên **DynamoDB** trong menu xổ xuống. Nhấp vào resources, bỏ chọn All và chọn bảng **ProductCatalog** chọn **Assign resources**
+7. Đặt tên cho Resource assignment (gán tài nguyên). Chọn vai trò mặc định. Chọn **Include specific resource types** dưới mục "1. Define resource selection".
 
-![Scheduled Backup 9](/images/1/1.4/21.png)
+![Sao lưu theo lịch trình 8](/images/1/1.4/1.4.4/8.png)
 
-9. Bạn có thể thấy trạng thái của công việc sao lưu trong phần công việc sau khoảng thời gian của cửa sổ sao lưu đã được lập lịch. Bạn có thể thấy sao lưu DynamoDB của mình đã hoàn thành.
+8. Dưới "2. Select specific resource types" (Chọn loại tài nguyên cụ thể), chọn loại tài nguyên **DynamoDB** từ menu thả xuống. Nhấp vào "Choose resources", bỏ chọn "All", và chọn bảng **ProductCatalog**. Nhấp vào **Assign resources**.
 
-![Scheduled Backup 10](/images/1/1.4/22.png)
-### Restore a Backup:
+![Sao lưu theo lịch trình 9](/images/1/1.4/1.4.4/9.png)
 
-Sau khi một tài nguyên được sao lưu ít nhất một lần, nó được coi là được bảo vệ và có thể được khôi phục bằng AWS Backup. Trong tài khoản của bạn, một bản sao lưu có thể chưa có sẵn. Nếu trường hợp này xảy ra, hãy xem các ảnh chụp màn hình thay vì thực hiện trong tài khoản của riêng bạn.
+9. Bạn có thể thấy trạng thái của công việc sao lưu trong phần "jobs" sau khoảng thời gian của cửa sổ sao lưu đã lên lịch. Bạn sẽ thấy sao lưu DynamoDB của mình đã hoàn thành.
 
-1. Trên trang **Protected resources**,bạn có thể khám phá chi tiết về các tài nguyên đã được sao lưu trong AWS Backup. Chọn tài nguyên bảng DynamoDB our DynamoDB table resource của chúng tôi. 
+![Sao lưu theo lịch trình 10](/images/1/1.4/1.4.4/10.png)
 
-![Scheduled Backup 11](/images/1/1.4/23.png)
+### Khôi phục một bản sao lưu:
 
-2. Chọn recovery point ID của resource. Chọn **Restore**. Nếu bạn không thấy một điểm phục hồi, bạn có thể nhấp vào "Create an on-demand backup" và hoàn thành việc sao lưu. Đối với mục đích của bài thực hành này, bạn cần một bản sao lưu đã hoàn thành để tiếp tục, và bạn có thể không muốn chờ kế hoạch sao lưu theo lịch của mình.
+Sau khi một tài nguyên đã được sao lưu ít nhất một lần, nó được coi là đã được bảo vệ và có thể được khôi phục bằng AWS Backup. Trong tài khoản của bạn, có thể một bản sao lưu chưa có sẵn. Nếu vậy, hãy xem qua các ảnh chụp màn hình thay vì thực hiện điều này trong tài khoản của riêng bạn.
 
-![Scheduled Backup 12](/images/1/1.4/24.png)
+1. Trên trang **Protected resources** (Tài nguyên được bảo vệ), bạn có thể xem chi tiết về các tài nguyên được sao lưu trong AWS Backup. Chọn tài nguyên bảng DynamoDB của chúng ta.
 
-3. Cung cấp tên bảng DynamoDB mới. Để tất cả các cài đặt ở mặc định và nhấp vào **Restore backup**
+![Sao lưu theo lịch trình 11](/images/1/1.4/1.4.4/11.png)
 
-![Scheduled Backup 13](/images/1/1.4/25.png)
+2. Chọn ID điểm khôi phục của tài nguyên. Nhấp vào **Restore**. _Lưu ý: Nếu bạn không thấy điểm khôi phục, bạn có thể nhấp vào "Create an on-demand backup" và hoàn tất sao lưu. Đối với mục đích của bài thực hành này, bạn cần một bản sao lưu đã hoàn thành để tiếp tục và bạn có thể không muốn chờ đợi bản sao lưu đã lên lịch trong kế hoạch sao lưu của mình._
 
-Thanh **Restore jobs** xuất hiện. Một thông điệp ở đầu trang cung cấp thông tin về công việc phục hồi. Bạn có thể thấy trạng thái công việc đang chạy. Sau một thời gian, bạn có thể thấy trạng thái thay đổi thành hoàn thành.
+![Sao lưu theo lịch trình 12](/images/1/1.4/1.4.4/12.png)
 
-![Scheduled Backup 14](/images/1/1.4/26.png)
+3. Cung cấp tên bảng DynamoDB mới. Giữ tất cả các cài đặt mặc định và nhấp vào **Restore backup**.
 
-Bạn cũng có thể theo dõi tất cả các công việc sao lưu và phục hồi trong bảng điều khiển trung tâm.
+![Sao lưu theo lịch trình 13](/images/1/1.4/1.4.4/13.png)
 
-![Scheduled Backup 15](/images/1/1.4/27.png)
+Bảng **Restore jobs** (Công việc khôi phục) xuất hiện. Một thông báo ở đầu trang cung cấp thông tin về công việc khôi phục. Bạn sẽ thấy trạng thái công việc đang chạy. Sau một thời gian, bạn sẽ thấy trạng thái thay đổi thành hoàn tất.
 
-Để xem bảng đã được khôi phục, hãy đến [DynamoDB Console](https://console.aws.amazon.com/dynamodbv2/)  và nhấp vào _Tables_ từ menu bên. Chọn bảng ProductCatalogRestored. Bạn có thể thấy bảng đã được khôi phục cùng với dữ liệu.
+![Sao lưu theo lịch trình 14](/images/1/1.4/1.4.4/14.png)
 
-![Scheduled Backup 16](/images/1/1.4/28.png)
+Bạn cũng có thể giám sát tất cả các công việc sao lưu và khôi phục trong bảng điều khiển trung tâm.
 
+![Sao lưu theo lịch trình 15](/images/1/1.4/1.4.4/15.png)
+
+Để xem bảng đã khôi phục, truy cập [DynamoDB Console](https://console.aws.amazon.com/dynamodbv2/) và nhấp vào **_Tables_** từ menu bên. Chọn bảng **ProductCatalogRestored**. Bạn sẽ thấy bảng đã được khôi phục cùng với dữ liệu.
+
+![Sao lưu theo lịch trình 16](/images/1/1.4/1.4.4/16.png)

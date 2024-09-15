@@ -1,7 +1,98 @@
 ---
-title : "Connect to Public Instance"
+title : "Step 4 - Check the content of the workshop folder"
 date : "`r Sys.Date()`"
-weight : 1
+weight : 5
 chapter : false
-pre : " <b> 3.1. </b> "
+pre : " <b> 3.1.5. </b> "
 ---
+
+On the EC2 instance, go to the workshop folder and run the ls command:
+
+```bash
+cd /home/ubuntu/workshop
+ls -l .
+```
+
+The following list indicates the folder structure and the files that will be used during the workshop:
+
+```bash
+.
+├── data
+│   ├── employees.csv
+│   ├── invoice-data2.csv
+│   ├── invoice-data.csv
+│   ├── logfile_medium1.csv
+│   ├── logfile_medium2.csv
+│   ├── logfile_small1.csv
+│   └── logfile_stream.csv
+├── ddbreplica_lambda.py
+├── ddb-replication-role-arn.txt
+├── gsi_city_dept.json
+├── gsi_manager.json
+├── iam-role-policy.json
+├── iam-trust-relationship.json
+├── lab_config.py
+├── load_employees.py
+├── load_invoice.py
+├── load_logfile_parallel.py
+├── load_logfile.py
+├── query_city_dept.py
+├── query_employees.py
+├── query_index_invoiceandbilling.py
+├── query_invoiceandbilling.py
+├── query_responsecode.py
+├── requirements.txt
+├── scan_for_managers_gsi.py
+├── scan_for_managers.py
+├── scan_logfile_parallel.py
+└── scan_logfile_simple.py
+```
+
+Python code:
+
+- ddbreplica_lambda.py
+- load_employees.py
+- load_invoice.py
+- load_logfile_parallel.py
+- load_logfile.py
+- lab_config.py
+- query_city_dept.py
+- query_employees.py
+- query_index_invoiceandbilling.py
+- query_invoiceandbilling.py
+- query_responsecode.py
+- scan_for_managers_gsi.py
+- scan_for_managers.py
+- scan_logfile_parallel.py
+- scan_logfile_simple.py
+
+JSON:
+
+- gsi_city_dept.json
+- gsi_manager.json
+- iam-role-policy.json
+- iam-trust-relationship.json
+
+Text (used later in the lab):
+
+- ddb-replication-role-arn.txt
+
+Run the ls command to show the sample data files:
+
+```bash
+ls -l ./data
+```
+
+./data contents:
+
+- employees.csv
+- invoice-data2.csv
+- invoice-data.csv
+- logfile_medium1.csv
+- logfile_medium2.csv
+- logfile_small1.csv
+- logfile_stream.csv
+
+{{%notice warning%}}
+The code provided is for instructional use only. It should not be used outside of this lab, and it is not fit for production use.
+{{%/notice%}}

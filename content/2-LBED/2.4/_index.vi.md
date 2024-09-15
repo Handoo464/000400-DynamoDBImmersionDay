@@ -6,26 +6,26 @@ chapter : false
 pre : " <b> 2.4. </b> "
 ---
 
-Amazon Bedrock là một dịch vụ được quản lý toàn phần, cung cấp lựa chọn các mô hình nền tảng (FM) hiệu suất cao từ các công ty AI hàng đầu như AI21 Labs, Anthropic, Cohere, Meta, Mistral AI, Stability AI và Amazon thông qua một API duy nhất, cùng với một loạt các khả năng bạn cần để xây dựng các ứng dụng AI tổng quát với bảo mật, quyền riêng tư và AI có trách nhiệm.
+Giờ đây, bạn đã tạo tất cả các kết nối và pipeline cần thiết, và dữ liệu đã được sao chép từ DynamoDB vào OpenSearch Service, bạn có nhiều lựa chọn để truy vấn dữ liệu của mình. Bạn có thể thực hiện tra cứu key/value trực tiếp với DynamoDB, thực hiện các truy vấn tìm kiếm trên OpenSearch và sử dụng Bedrock cùng với OpenSearch để đề xuất sản phẩm bằng ngôn ngữ tự nhiên.
 
-Truy vấn này sẽ sử dụng OpenSearch làm cơ sở dữ liệu vector để tìm sản phẩm phù hợp nhất với ý định mong muốn của bạn. Nội dung của chỉ mục OpenSearch được tạo thông qua trình kết nối DynamoDB Zero ETL. Khi bản ghi được thêm vào DynamoDB, trình kết nối sẽ tự động di chuyển chúng vào OpenSearch. OpenSearch sau đó sử dụng mô hình Titan Embeddings để trang trí dữ liệu đó.
+Truy vấn này sẽ sử dụng OpenSearch như một cơ sở dữ liệu vector để tìm sản phẩm phù hợp nhất với ý định của bạn. Nội dung của chỉ mục OpenSearch được tạo thông qua kết nối DynamoDB Zero ETL. Khi các bản ghi được thêm vào DynamoDB, kết nối này tự động chuyển chúng vào OpenSearch. OpenSearch sau đó sử dụng mô hình Titan Embeddings để bổ sung dữ liệu đó.
 
-Tập lệnh xây dựng một truy vấn tìm kiếm chỉ mục OpenSearch cho các sản phẩm có liên quan nhất đến văn bản nhập của bạn. Điều này được thực hiện bằng cách sử dụng truy vấn "thần kinh", tận dụng các nhúng được lưu trữ trong OpenSearch để tìm các sản phẩm có nội dung văn bản tương tự. Sau khi truy xuất các sản phẩm có liên quan, kịch bản sử dụng Bedrock để tạo ra phản hồi tinh vi hơn thông qua mô hình Claude. Điều này liên quan đến việc tạo một lời nhắc kết hợp truy vấn ban đầu của bạn với dữ liệu đã truy xuất và gửi lời nhắc này đến Bedrock để xử lý.
+Script này xây dựng một truy vấn tìm kiếm chỉ mục OpenSearch để tìm các sản phẩm phù hợp nhất với văn bản đầu vào của bạn. Điều này được thực hiện bằng truy vấn "neural", sử dụng các embeddings được lưu trữ trong OpenSearch để tìm các sản phẩm có nội dung văn bản tương tự. Sau khi truy xuất các sản phẩm liên quan, script sử dụng Bedrock để tạo ra một phản hồi tinh vi hơn thông qua mô hình Claude. Điều này bao gồm việc tạo ra một prompt kết hợp truy vấn ban đầu của bạn với dữ liệu đã truy xuất và gửi prompt này đến Bedrock để xử lý.
 
-1. Quay lại Bảng điều khiển Cloud9 IDE.
+1. Quay lại Cloud9 IDE Console.
     
-2. Trước tiên, hãy gửi yêu cầu trực tiếp đến DynamoDB
+2. Đầu tiên, chúng ta sẽ thực hiện một yêu cầu trực tiếp đến DynamoDB
     
     ```bash
-      aws dynamodb get-item \
-          --table-name ProductDetails \
-          --key '{"ProductID": {"S": "S020"}}'
+    aws dynamodb get-item \
+        --table-name ProductDetails \
+        --key '{"ProductID": {"S": "S020"}}'
     ```
     
-    Đây là ví dụ về tra cứu khóa/giá trị mà DynamoDB vượt trội. Nó trả về chi tiết sản phẩm cho một sản phẩm cụ thể, được xác định bằng ProductID của sản phẩm đó.
+    Đây là ví dụ về tra cứu key/value mà DynamoDB rất xuất sắc. Nó trả về chi tiết sản phẩm cho một sản phẩm cụ thể, được xác định bằng ProductID của nó.
     
-3. Tiếp theo, hãy thực hiện một truy vấn tìm kiếm đến OpenSearch. Chúng tôi sẽ tìm thấy váy bao gồm "Spandex" trong mô tả của họ.
-    
+3. Tiếp theo, chúng ta sẽ thực hiện một truy vấn tìm kiếm đến OpenSearch. Chúng ta sẽ tìm những chiếc váy có chứa "Spandex" trong mô tả.
+
     ```bash
     curl --request POST \
       ${OPENSEARCH_ENDPOINT}/product-details-index-en/_search \
@@ -57,21 +57,21 @@ Tập lệnh xây dựng một truy vấn tìm kiếm chỉ mục OpenSearch cho
       }' | jq .
     ```
     
-    Hãy thử thay đổi và xem kết quả thay đổi như thế nào.`Spandex``Polyester`
+    Hãy thử thay đổi `Spandex` thành `Polyester` và xem kết quả thay đổi như thế nào.
     
-4. Cuối cùng, hãy yêu cầu Bedrock cung cấp một số đề xuất sản phẩm bằng cách sử dụng một trong những kịch bản được cung cấp trong phòng thí nghiệm.
-    
-    Truy vấn này sẽ sử dụng OpenSearch làm cơ sở dữ liệu vector để tìm sản phẩm phù hợp nhất với ý định mong muốn của bạn. Nội dung của chỉ mục OpenSearch được tạo thông qua trình kết nối DynamoDB Zero ETL. Khi bản ghi được thêm vào DynamoDB, trình kết nối sẽ tự động di chuyển chúng vào OpenSearch. OpenSearch sau đó sử dụng mô hình Titan Embeddings để trang trí dữ liệu đó.
-    
-    Tập lệnh xây dựng một truy vấn tìm kiếm chỉ mục OpenSearch cho các sản phẩm có liên quan nhất đến văn bản nhập của bạn. Điều này được thực hiện bằng cách sử dụng truy vấn "thần kinh", tận dụng các nhúng được lưu trữ trong OpenSearch để tìm các sản phẩm có nội dung văn bản tương tự. Sau khi truy xuất các sản phẩm có liên quan, kịch bản sử dụng Bedrock để tạo ra phản hồi tinh vi hơn thông qua mô hình Claude. Điều này liên quan đến việc tạo một lời nhắc kết hợp truy vấn ban đầu của bạn với dữ liệu đã truy xuất và gửi lời nhắc này đến Bedrock để xử lý.
-    
-    Trong bảng điều khiển, thực thi tập lệnh python được cung cấp để thực hiện truy vấn đến Bedrock và trả về kết quả sản phẩm.
-    
+4. Cuối cùng, chúng ta sẽ yêu cầu Bedrock cung cấp một số đề xuất sản phẩm bằng cách sử dụng một trong các script đã cung cấp trong lab.
+
+    Truy vấn này sẽ sử dụng OpenSearch như một cơ sở dữ liệu vector để tìm sản phẩm phù hợp nhất với ý định của bạn. Nội dung của chỉ mục OpenSearch được tạo thông qua kết nối DynamoDB Zero ETL. Khi các bản ghi được thêm vào DynamoDB, kết nối này tự động chuyển chúng vào OpenSearch. OpenSearch sau đó sử dụng mô hình Titan Embeddings để bổ sung dữ liệu đó.
+
+    Script này xây dựng một truy vấn tìm kiếm chỉ mục OpenSearch để tìm các sản phẩm phù hợp nhất với văn bản đầu vào của bạn. Điều này được thực hiện bằng truy vấn "neural", sử dụng các embeddings được lưu trữ trong OpenSearch để tìm các sản phẩm có nội dung văn bản tương tự. Sau khi truy xuất các sản phẩm liên quan, script sử dụng Bedrock để tạo ra một phản hồi tinh vi hơn thông qua mô hình Claude. Điều này bao gồm việc tạo ra một prompt kết hợp truy vấn ban đầu của bạn với dữ liệu đã truy xuất và gửi prompt này đến Bedrock để xử lý.
+
+    Trong console, thực hiện script Python được cung cấp để thực hiện truy vấn đến Bedrock và trả về kết quả sản phẩm.
+
     ```bash
     python bedrock_query.py product_recommend en "I need a warm winter coat" $METADATA_AWS_REGION $OPENSEARCH_ENDPOINT $MODEL_ID | jq .
     ```
     
-    ![Kết quả truy vấn](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/ddb-os-zetl17.jpg)
+   ![Kết quả truy vấn](/images/2/2.4/1.jpg)
     
 5. Thử thêm một mục mới vào bảng DynamoDB của bạn.
     
@@ -87,15 +87,14 @@ Tập lệnh xây dựng một truy vấn tìm kiếm chỉ mục OpenSearch cho
         }'
     ```
     
-6. Hãy thử sửa đổi mục tải DynamoDB ở trên để truy xuất mục mới của bạn. Tiếp theo, hãy thử sửa đổi truy vấn OpenSearch để tìm kiếm "Socks" có chứa "Wool". Cuối cùng, nói với Bedrock "Tôi cần vớ ấm để đi bộ đường dài vào mùa đông". Nó có giới thiệu mặt hàng mới của bạn không?
+6. Thử sửa đổi lệnh DynamoDB `get-item` ở trên để truy xuất mục mới của bạn. Tiếp theo, thử sửa đổi truy vấn OpenSearch để tìm kiếm "Socks" có chứa "Wool". Cuối cùng, yêu cầu Bedrock "I need warm socks for hiking in winter". Liệu nó có đề xuất mục mới của bạn không?
     
 {{%notice tip%}}
 Tiếp tục truy vấn!
-Đừng chỉ dừng lại ở đó với các truy vấn của bạn. Thử yêu cầu quần áo cho mùa đông (nó sẽ giới thiệu các sản phẩm có len?) hoặc trước khi đi ngủ. Lưu ý rằng có một danh mục sản phẩm rất nhỏ cần được nhúng, vì vậy cụm từ tìm kiếm của bạn nên bị giới hạn dựa trên những gì bạn thấy khi đánh giá bảng DynamoDB.
+Đừng dừng lại ở đây với các truy vấn của bạn. Hãy thử yêu cầu quần áo cho mùa đông (liệu nó có đề xuất các sản phẩm có len không?) hoặc cho giờ đi ngủ. Lưu ý rằng có một danh mục sản phẩm rất nhỏ để nhúng, vì vậy thuật ngữ tìm kiếm của bạn nên giới hạn dựa trên những gì bạn đã thấy khi xem bảng DynamoDB.
 {{%/notice%}}
 
-Chúc mừng! Bạn đã hoàn thành phòng thí nghiệm.
-
+Chúc mừng! Bạn đã hoàn thành bài lab.
 {{%notice warning%}}
-_Nếu chạy trong tài khoản của riêng bạn, hãy nhớ xóa CloudFormation Stack sau khi hoàn thành phòng thực hành để tránh các khoản phí không mong muốn._
+_Nếu bạn đang chạy trên tài khoản của riêng mình, hãy nhớ xóa CloudFormation Stack sau khi hoàn thành bài lab để tránh các chi phí không mong muốn._
 {{%/notice%}}

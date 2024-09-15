@@ -82,7 +82,7 @@ aws dynamodb get-item \
 
 We will see this output:
 
-```
+```json
 {
     "Item": {
         "Price": {

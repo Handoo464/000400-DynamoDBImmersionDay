@@ -1,11 +1,16 @@
 ---
 title : "Getting Started"
 date :  "`r Sys.Date()`" 
-weight : 10
+weight : 1
 chapter : false
 pre : " <b> 2.1. </b> "
 ---
+## Background
+Imagine you are building an online store. Most of your access patterns fit very well with DynamoDB's strengths. Looking up items by SKU, finding shopping cart contents, and viewing customer order history are all relatively straight forward key value queries.
 
+As your application grows, though, you may want to add some additional access patterns. Search? Filtering? What about this whole "Generative AI" thing you've been hearing so much about. That might be an interesting differentiator for your app.
+
+In this lab, we will learn how to integrate DynamoDB with Amazon OpenSearch Service to support those new access patterns.
 
 {{%notice warning%}}
 The first half of these setup instructions are identitical for LADV, LHOL, LMR, LBED, and LGME - all of which use the same Cloud9 template. Only complete this section once, and only if you're running it on your own account. If you have already launched the Cloud9 stack in a different lab, skip to the **Launch the zETL CloudFormation stack** section
@@ -31,11 +36,11 @@ During the course of the lab, you will create resources that will incur a cost t
     Leave the _WorkshopZIP_ parameter unchanged and click _Next_
     
 
-![CloudFormation parameters](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/awsconsole1.png)
+![CloudFormation parameters](/images/2/2.1/2.png)
 
 1. Scroll to the bottom and click _Next_, and then review the _Template_ and _Parameters_. When you are ready to create the stack, scroll to the bottom, check the box acknowledging the creation of IAM resources, and click _Submit_.
 
-![Acknowledge IAM role capabilities](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/awsconsole2.png) The stack will create a Cloud9 lab instance, a role for the instance, and a role for the AWS Lambda function used later on in the lab. It will use Systems Manager to configure the Cloud9 instance.
+![Acknowledge IAM role capabilities](/images/2/2.1/3.png) The stack will create a Cloud9 lab instance, a role for the instance, and a role for the AWS Lambda function used later on in the lab. It will use Systems Manager to configure the Cloud9 instance.
 
 1. After the CloudFormation stack is `CREATE_COMPLETE`, continue with the next stack.
 
@@ -51,7 +56,7 @@ _Do not continue unless the Cloud9 CloudFormation Template has finished deployin
 3. In the Parameters section, optionally change the value of OpenSearchClusterName to set a specific name for your OpenSearch cluster or leave the parameter unchanged. Click _Next_
     
 
-![CloudFormation parameters](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/zetl-cfn-console1.png)
+![CloudFormation parameters](/images/2/2.1/4.png)
 
 1. Scroll to the bottom and click _Next_, and then review the _Template_ and _Parameters_. When you are ready to create the stack, scroll to the bottom and click _Submit_.
     

@@ -5,10 +5,11 @@ weight : 2
 chapter : false
 pre : " <b> 1.1.2. </b> "
 ---
+Bạn có thể truy cập session manager nhập lệnh `sudo su` sau đó thực hiện các câu lệnh hoặc bạn có thể truy cập cloud9 và thực hiện các câu lệnh tiếp theo
 
 Chúng ta bây giờ sẽ tạo các bảng (và trong bước tiếp theo, tải dữ liệu vào chúng) dựa trên [dữ liệu mẫu từ DynamoDB Developer Guide](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SampleData.html).
 
-Sao chép các lệnh `create-table` bên dưới và dán chúng vào command prompt của AWS Cloud9, nhấn enter ở lệnh cuối cùng để thực thi nó. Sau đó, hãy sử dụng các lệnh chờ tương ứng bằng cách dán chúng vào cùng một terminal và chạy chúng.
+Sao chép các lệnh `create-table` bên dưới và dán chúng vào command prompt, nhấn enter ở lệnh cuối cùng để thực thi nó. Sau đó, hãy sử dụng các lệnh chờ tương ứng bằng cách dán chúng vào cùng một terminal và chạy chúng.
 
 ```bash
 aws dynamodb create-table \

@@ -16,14 +16,14 @@ Trong quá trình lab, bạn sẽ tạo các bảng DynamoDB có thể phát sin
 
 2. Nhấp vào *Next trên hộp thoại đầu tiên.
 
-3. Trong phần Parameters, lưu ý rằng *Timeout* được đặt thành 0. Điều này có nghĩa là phiên Cloud9 sẽ không ngủ; bạn có thể muốn thay đổi giá trị này thành một giá trị như 60 để bảo vệ khỏi những khoản phí bất ngờ nếu bạn quên xóa stack khi kết thúc. Giữ nguyên tham số *WorkshopZIP và nhấp Next.
+3. Trong phần Parameters, lưu ý rằng *Timeout* được đặt thành 0. Điều này có nghĩa là phiên Cloud9 sẽ không ngủ; bạn có thể muốn thay đổi giá trị này thành một giá trị như 60 để bảo vệ khỏi những khoản phí bất ngờ nếu bạn quên xóa stack khi kết thúc. Giữ nguyên tham số *WorkshopZIP* và nhấp *Next*.
  
 4. Cuộn xuống dưới cùng và nhấp **Next**, sau đó xem lại Mẫu và Tham số. Khi bạn sẵn sàng tạo stack, cuộn xuống dưới cùng, đánh dấu hộp xác nhận việc tạo các tài nguyên IAM, và nhấp vào **Create stack**. 
    ![CloudFormation parameters](/images/1/3.png)
 
-Stack sẽ tạo một phiên bản Cloud9 lab, một vai trò cho phiên bản đó, và một vai trò cho hàm AWS Lambda được sử dụng sau này trong lab. Nó sẽ sử dụng Systems Manager để cấu hình phiên bản Cloud9.
+Stack sẽ tạo một phiên bản Cloud9 lab, một role cho instance đó, và một role cho hàm AWS Lambda được sử dụng sau này trong lab. Nó sẽ sử dụng Systems Manager để cấu hình phiên bản Cloud9.
 
-Sau khi stack CloudFormation có trạng thái CREATE_COMPLETE, hãy tiếp tục đến phần tiếp theo.
+Sau khi stack CloudFormation có trạng thái `CREATE_COMPLETE`, hãy tiếp tục đến phần tiếp theo.
 
 Truy cập EC2 tìm kiếm Instance đã được tạo từ stack.
 

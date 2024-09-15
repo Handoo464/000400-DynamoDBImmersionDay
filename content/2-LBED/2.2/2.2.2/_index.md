@@ -16,7 +16,7 @@ Bedrock requires different FMs to be enabled before they are used.
     
 2. Click on "Manage model access"
     
-    ![Manage model access](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/ddb-os-zetl10.jpg)
+    ![Manage model access](/images/2/2.2/9.jpg)
     
 3. Select "Titan Embeddings G1 - Text" and "Claude", then click `Request model access`
     

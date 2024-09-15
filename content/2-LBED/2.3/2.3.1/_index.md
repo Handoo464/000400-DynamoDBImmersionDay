@@ -10,13 +10,11 @@ In this section you'll configure ML and Pipeline connectors in OpenSearch Servic
 
 Building a sig-v4 signed request requires a session token, access key, and secret access key. You'll first retrieve these from your Cloud9 Instance metadata with the provided "credentials.sh" script which exports required values to environmental variables. In the following steps, you'll also export other values to environmental variables to allow for easy substitution into listed commands.
 
-1. Run the credentials.sh script to retrieve and export credentials. These credentials will be used to sign API requests to the OpenSearch cluster. Note the leading "." before "./credentials.sh", this must be included to ensure that the exported credentials are available in the currently running shell.
-    
-    ```bash
-    . ./credentials.sh 
-    ```
-
 1. Edit the credentials.sh
+
+You can make edits on Cloud9/Session Manager/VSCode.
+
+On VSCode, you need to log in using the command `sudo su`, then execute the command `vim credentials.sh` with the following content:
 
     ```bash
     # Lấy token từ metadata service
@@ -51,6 +49,11 @@ Building a sig-v4 signed request requires a session token, access key, and secre
     echo "METADATA_AWS_REGION: $Region"
     echo "METADATA_AWS_ROLE: $Role"
     echo "METADATA_AWS_EXPIRATION: $Expiration"
+    ```
+1. Run the credentials.sh script to retrieve and export credentials. These credentials will be used to sign API requests to the OpenSearch cluster. Note the leading "." before "./credentials.sh", this must be included to ensure that the exported credentials are available in the currently running shell.
+    
+    ```bash
+    . ./credentials.sh 
     ```
     
 2. Next, export an environmental variable with the OpenSearch endpoint URL. This URL is listed in the CloudFormation Stack Outputs tab as "OSDomainEndpoint". This variable will be used in subsequent commands.

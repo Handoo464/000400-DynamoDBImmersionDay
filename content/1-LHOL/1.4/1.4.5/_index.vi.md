@@ -6,9 +6,9 @@ chapter : false
 pre : " <b> 1.4.5. </b> "
 ---
 
-Khách hàng thường yêu cầu rằng các nhà phát triển/quản trị viên của họ nên được phép tạo và xóa các bảng DynamoDB nhưng không nên được phép xóa các bản sao lưu.
+Khách hàng thường yêu cầu cho phép nhà phát triển/quản trị viên của họ tạo và xóa bảng DynamoDB, nhưng không được phép xóa các bản sao lưu.
 
-Bạn có thể đạt được điều này bằng cách tạo chính sách IAM. Dưới đây là một ví dụ về chính sách IAM của AWS cho phép "Tạo Bảng", "Liệt kê Bảng", "Tạo Sao Lưu" và "Xóa Bảng" và từ chối "Xóa Sao Lưu" của bảng DynamoDB.
+Bạn có thể đạt được điều này bằng cách tạo chính sách IAM. Dưới đây là ví dụ về chính sách AWS IAM cho phép “Tạo Bảng” (Create Table), “Liệt kê Bảng” (List Table), “Tạo Sao lưu” (Create Backup) và “Xóa Bảng” (Delete Table), nhưng từ chối quyền “Xóa Sao lưu” (Delete Backup) của bảng DynamoDB.
 
 ```json
 {
@@ -38,13 +38,11 @@ Bạn có thể đạt được điều này bằng cách tạo chính sách IAM
         }
     ]
 }
-
-
 ```
 
-[Tại trang tài liệu này, bạn sẽ tìm thấy thêm thông tin về việc sử dụng IAM với các bản sao lưu DynamoDB.](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/backuprestore_IAM.html) 
+[Tại trang tài liệu này, bạn sẽ tìm thấy thêm thông tin về việc sử dụng IAM với sao lưu DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/backuprestore_IAM.html).
 
-Bạn cũng có thể hạn chế trong AWS Backup bằng cách từ chối, chẳng hạn như từ chối "DeleteBackupSelection" trong chính sách IAM.
+Bạn cũng có thể giới hạn quyền trong AWS Backup bằng cách từ chối quyền “DeleteBackupSelection” trong chính sách IAM.
 
 ```json
 {
@@ -76,17 +74,14 @@ Bạn cũng có thể hạn chế trong AWS Backup bằng cách từ chối, ch�
         }
     ]
 }
-
-
 ```
 
-Bạn có thể áp dụng chính sách này cho vai trò và gán vai trò cho nhóm IAM. 
-Bây giờ, người dùng thuộc nhóm IAM này sẽ thừa hưởng quyền.
+Bạn có thể áp dụng chính sách này cho một vai trò (role) và gán vai trò đó cho một nhóm IAM. Bây giờ, người dùng thuộc nhóm IAM này sẽ thừa hưởng các quyền hạn này.
 
-Giả sử bây giờ người dùng cố gắng xóa bản sao lưu trong AWS Backup.
+Giả sử người dùng cố gắng xóa bản sao lưu trong AWS Backup.
 
-![Restrict Backup Deletion 1](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/hands-on-labs/backup/restrict_delete_1.png)
+![Hạn chế xóa sao lưu 1](/images/1/1.4/1.4.5/1.png)
 
-Người dùng nhận được thông báo lỗi truy cập bị từ chối do thiếu quyền để xóa bản sao lưu.
+Người dùng sẽ gặp lỗi "Access Denied" do không có đủ quyền để xóa bản sao lưu.
 
-![Restrict Backup Deletion 2](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/hands-on-labs/backup/restrict_delete_2.png)
+![Hạn chế xóa sao lưu 2](/images/1/1.4/1.4.5/2.png)

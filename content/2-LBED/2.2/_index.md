@@ -21,4 +21,4 @@ zETL CloudFormation Template Resources:
 - DynamoDB Table: DynamoDB table to store product descriptions. Has Point-in-time Recovery (PITR) and DynamoDB Streams enabled.
 - Amazon OpenSearch Service Domain: Single-node OpenSearch Service cluster to recieve data from DynamoDB and act as a vector database.
 
-![Final Deployment Architecture](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/ddb-os-zetl.png)
+![Final Deployment Architecture](/images/2/1.png)

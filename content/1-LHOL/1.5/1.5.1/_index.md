@@ -19,4 +19,4 @@ CloudFormation DMS Instance Resources:
 - DMS VPC: Migration VPC on in the N. Virginia region. This VPC will host DMS replication instance.
 - Replication Instance: DMS Replication instance that will facilitate database migration from source MySQL server on EC2 to Amazon DynamoDB
 
-![Final Deployment Architecture](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/migration-environment.png)
+![Final Deployment Architecture](/images/1/1.5/1.png)

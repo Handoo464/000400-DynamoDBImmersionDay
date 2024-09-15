@@ -6,7 +6,7 @@ chapter : false
 pre : " <b> 1.2. </b> "
 ---
 
-We will be exploring DynamoDB with the AWS CLI using the [AWS cloud9 management Console](https://console.aws.amazon.com/cloud9/home) . If you haven't already, choose _open IDE_ to launch AWS Cloud9 environment. You can close the Welcome screen and adjust your terminal to increase screen area, or close all the windows and navigate to _Window_ -> _New Terminal_ to open a new terminal window.
+We will be exploring DynamoDB with the AWS CLI using the AWS cloud9 management Console or Session manager
 
 The highest level of abstraction in DynamoDB is a _Table_ (there isn't a concept of a "Database" that has a bunch of tables inside of it like in other NOSQL or RDBMS services). Inside of a Table you will insert _Items_, which are analogous to what you might think of as a row in other services. Items are a collection of _Attributes_, which are analogous to columns. Every item must have a _Primary Key_ which will uniquely identify that row (two items may not contain the same Primary Key). At a minimum when you create a table you must choose an attribute to be the _Partition Key_ (aka the Hash Key) and you can optionally specify another attribute to be the _Sort Key_.
 

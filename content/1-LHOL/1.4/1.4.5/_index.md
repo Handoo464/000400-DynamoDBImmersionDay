@@ -84,8 +84,8 @@ You can apply the policy to role and assign the role to IAM group. Now users bel
 
 Let’s say now the user tries to delete the backup in AWS backup.
 
-![Restrict Backup Deletion 1](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/hands-on-labs/backup/restrict_delete_1.png)
+![Restrict Backup Deletion 1](/images/1/1.4/1.4.5/1.png)
 
 User gets the access denied error due to insufficient permission to delete the backup.
 
-![Restrict Backup Deletion 2](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/hands-on-labs/backup/restrict_delete_2.png)
+![Restrict Backup Deletion 2](/images/1/1.4/1.4.5/2.png)

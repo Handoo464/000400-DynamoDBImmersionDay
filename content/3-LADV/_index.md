@@ -10,12 +10,12 @@ In this workshop, you review [Amazon DynamoDB](https://docs.aws.amazon.com/amaz
 
 Here's what this workshop includes:
 
-- [Start here: Getting Started](https://catalog.workshops.aws/dynamodb-labs/en-US/design-patterns/setup)
-- [Exercise 1: DynamoDB Capacity Units and Partitioning](https://catalog.workshops.aws/dynamodb-labs/en-US/design-patterns/ex1capacity)
-- [Exercise 2: Sequential and Parallel Table Scans](https://catalog.workshops.aws/dynamodb-labs/en-US/design-patterns/ex2scan)
-- [Exercise 3: Global Secondary Index Write Sharding](https://catalog.workshops.aws/dynamodb-labs/en-US/design-patterns/ex3gsisharding)
-- [Exercise 4: Global Secondary Index Key Overloading](https://catalog.workshops.aws/dynamodb-labs/en-US/design-patterns/ex4gsioverload)
-- [Exercise 5: Sparse Global Secondary Indexes](https://catalog.workshops.aws/dynamodb-labs/en-US/design-patterns/ex5sparse)
-- [Exercise 6: Composite Keys](https://catalog.workshops.aws/dynamodb-labs/en-US/design-patterns/ex6compos)
-- [Exercise 7: Adjacency Lists](https://catalog.workshops.aws/dynamodb-labs/en-US/design-patterns/ex7adjlists)
-- [Exercise 8: Amazon DynamoDB Streams and AWS Lambda](https://catalog.workshops.aws/dynamodb-labs/en-US/design-patterns/ex8streams)
+- Start here: Getting Started
+- Exercise 1: DynamoDB Capacity Units and Partitioning
+- Exercise 2: Sequential and Parallel Table Scans
+- Exercise 3: Global Secondary Index Write Sharding
+- Exercise 4: Global Secondary Index Key Overloading
+- Exercise 5: Sparse Global Secondary Indexes
+- Exercise 6: Composite Keys
+- Exercise 7: Adjacency Lists
+- Exercise 8: Amazon DynamoDB Streams and AWS Lambda

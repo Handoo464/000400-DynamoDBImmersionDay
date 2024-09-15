@@ -6,7 +6,8 @@ chapter : false
 ---
 # Amazon DynamoDB Immersion Day
 
-![Mở Biểu trưng DynamoDB](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/Amazon-DynamoDB.png)
+![Mở Biểu trưng DynamoDB](images/1/dynamodb.png)
+
 
 Chào mừng bạn đến với AWS Workshop và Lab Content Portal dành cho [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html) , một cơ sở dữ liệu khóa-giá trị và tài liệu mang lại hiệu suất mili giây một chữ số ở mọi quy mô. Tại đây, bạn sẽ tìm thấy bộ sưu tập các hội thảo và nội dung thực hành nhằm giúp bạn hiểu rõ hơn về các tính năng của DynamoDB và các biện pháp thực hành tốt nhất về lập mô hình dữ liệu NoSQL.
 

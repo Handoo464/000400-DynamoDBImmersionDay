@@ -6,7 +6,6 @@ chapter : false
 pre : " <b> 1.1.4. </b> "
 ---
 
-
 Nếu bạn đã sử dụng tài khoản của riêng mình, vui lòng xóa các tài nguyên sau:
 - Bốn bảng DynamoDB đã được tạo trong phần Bắt đầu của lab:
 ```bash

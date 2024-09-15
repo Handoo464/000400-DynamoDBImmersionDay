@@ -6,4 +6,4 @@ chapter : false
 pre : " <b> 2.3. </b> "
 ---
 
-Amazon Bedrock là một dịch vụ được quản lý toàn phần, cung cấp lựa chọn các mô hình nền tảng (FM) hiệu suất cao từ các công ty AI hàng đầu như AI21 Labs, Anthropic, Cohere, Meta, Mistral AI, Stability AI và Amazon thông qua một API duy nhất, cùng với một loạt các khả năng bạn cần để xây dựng các ứng dụng AI tổng quát với bảo mật, quyền riêng tư và AI có trách nhiệm.
+Trong phần này, bạn sẽ cấu hình tích hợp giữa các dịch vụ. Đầu tiên, bạn sẽ thiết lập các kết nối ML (Machine Learning) và Pipeline trong OpenSearch Service, sau đó thiết lập kết nối zero ETL để di chuyển dữ liệu đã ghi vào DynamoDB sang OpenSearch. Khi các tích hợp này đã được thiết lập, bạn có thể ghi các bản ghi vào DynamoDB làm nguồn dữ liệu chính của mình và sau đó tự động có dữ liệu đó sẵn sàng để truy vấn trong các dịch vụ khác.

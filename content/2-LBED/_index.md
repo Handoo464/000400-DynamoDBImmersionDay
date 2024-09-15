@@ -18,4 +18,4 @@ This workshop will allow you to set up one such use case. DynamoDB will be the s
 _This lab creates OpenSearch Service, DynamoDB, and Secrets Manager resources. If running in you own account, these resources will incur charges of approximately $30 a month. Remember to delete the CloudFormation Stack after completing the lab._
 {{%/notice%}}
 
-![Final Deployment Architecture](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/ddb-os-zetl.png)
+![Final Deployment Architecture](/images/2/1.png)

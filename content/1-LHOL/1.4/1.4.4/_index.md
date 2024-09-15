@@ -6,77 +6,81 @@ chapter : false
 pre : " <b> 1.4.4. </b> "
 ---
 
-#### Create Public Subnet
+You must create at least one vault before creating a backup plan or starting a backup job.
 
-1. Click **Subnets**.
-      - Click **Create subnet**.
-![VPC](/images/2/3.png)
+1. In the AWS Management Console, navigate to **Services -> AWS Backup.** Click on **Create Backup vault** under **Backup vaults**.
 
-2. At the **Create subnet** page.
-    - In the **VPC ID** section, click **Lab VPC**.
-    - In the **Subnet name** field, enter **Lab Public Subnet**.
-    - In the **Availability Zone** section, select the first Availability zone.
-    - In the field **IPv4 CIRD block** enter **10.10.1.0/24**.
-![VPC](/images/2/4.png)
+![Scheduled Backup 1](/images/1/1.4/1.4.4/1.png)
 
-3. Scroll to the bottom of the page, click **Create subnet**.
+2. Provide Backup vault name of your choice. AWS KMS encryption master key. By default, AWS Backup creates a master key with the alias aws/backup for you. You can choose that key or choose any other key in your account. Click on **Create Backup vault**
 
-4. Click **Lab Public Subnet**.
-    - Click **Actions**.
-    - Click **Edit subnet settings**.
-![VPC](/images/2/5.png)
+![Scheduled Backup 2](/images/1/1.4/1.4.4/2.png)
 
-5. Click **Enable auto-assign public IPv4 address**.
-  ![VPC](/images/2/6.png)
+You can see Backup vault is created successfully
 
-6. Click **Internet Gateways**.
-    - Click **Create internet gateway**.
-![VPC](/images/2/7.png)
+![Scheduled Backup 3](/images/1/1.4/1.4.4/3.png)
 
-7. At the **Create internet gateway** page.
-    - In the **Name tag** field, enter **Lab IGW**.
-    - Click **Create internet gateway**.
-![VPC](/images/2/8.png)
+Now, we need to create backup plan.
 
-8. After successful creation, click **Actions**.
-    - Click **Attach to VPC**.
-![VPC](/images/2/9.png)
+3. Click on **Create Backup plan** under **Backup plans**.
 
-9. At the **Attach to VPC** page.
-    - In the **Available VPCs** section, select **Lab VPC**.
-    - Click **Attach internet gateway**.
-    - Check the successful attaching process as shown below.
-![VPC](/images/2/10.png)
+![Scheduled Backup 4](/images/1/1.4/1.4.4/4.png)
 
-10. Next we will create a custom route table to assign to **Lab Public Subnet**.
-    - Click **Route Tables**.
-    - Click **Create route table**.
-![VPC](/images/2/11.png)
+4. Select **Build a new plan**. Provide **backup plan name** and **rule name**.
 
-11. At the **Create route table** page.
-    - In the **Name** field, enter **Lab Publicrtb**.
-    - In the **VPC** section, select **Lab VPC**.
-    - Click **Create route table**.
-![VPC](/images/2/12.png)
-12. After creating the route table successfully.
-    - Click **Edit routes**.
-![VPC](/images/2/13.png)
+![Scheduled Backup 5](/images/1/1.4/1.4.4/5.png)
 
-13. At the **Edit routes** page.
-    - Click **Add route**.
-    - In the **Destination** field, enter 0.0.0.0/0
-    - In the **Target** section, select **Internet Gateway** and then select **Lab IGW**.
-    - Click **Save changes**.
-![VPC](/images/2/14.png)
+5. Select **backup frequency.** The backup frequency determines how often a backup is created. Using the console, you can choose a **frequency** of every 12 hours, daily, weekly, or monthly. Choose a **backup window**. Backup window consists of the time that the backup window begins and the duration of the window in hours. Backup jobs are started within this window. I am configuring backup at 6 PM UTC start within 1 hour and completes within 4 hours.
+    
+    Further, select **lifecycle**. The lifecycle defines when a backup is transitioned to cold storage and when it expires. I am configuring backup to move cold storage after 31 days and expire after 366 days.
+    
 
-14. Click the **Subnet associations** tab.
-    - Click **Edit subnet associations** to proceed with the associate custom route table we just created in **Lab Public Subnet**.
-![VPC](/images/2/15.png)
+![Scheduled Backup 6](/images/1/1.4/1.4.4/6.png)
 
-15. At the **Edit subnet associations** page.
-    - Click on **Lab Public Subnet**.
-    - Click **Save associations**.
-![VPC](/images/2/16.png)
+6. Select **backup vault** we created earlier. Click on **Create plan**.
 
-16. Check that the route table information has been associated with **Lab Public Subnet** and the internet route information has been pointed to the Internet Gateway as shown below.
-![VPC](/images/2/17.png)
+![Scheduled Backup 7](/images/1/1.4/1.4.4/7.png)
+
+_Note: Backups that are transitioned to cold storage must be stored in cold storage for a minimum of 90 days_
+
+Now assign the resource to backup plan. When you assign a resource to a backup plan, that resource is backed up automatically according to the backup plan.
+
+7. Give Resource a assignment name. Choose the default role. Select **Include specific resource types** under "1. Define resource selection"
+
+![Scheduled Backup 8](/images/1/1.4/1.4.4/8.png)
+
+8. Under "2. Select specific resource types" select the resource type **DynamoDB** in the drop down. Click choose resources, uncheck All, and select the **ProductCatalog** table. Click **Assign resources**
+
+![Scheduled Backup 9](/images/1/1.4/1.4.4/9.png)
+
+9. You can see the status of your backup job under jobs section after your scheduled backup window timeframe. You can see your DynamoDB backup is completed.
+
+![Scheduled Backup 10](/images/1/1.4/1.4.4/10.png)
+
+### Restore a Backup:
+
+After a resource has been backed up at least once, it is considered protected and is available to be restored using AWS Backup. In your account a backup may not yet be available. If this is the case, review the screenshots in lieu of doing this in your own account.
+
+1. On the **Protected resources** page, you can explore details of the resources that are backed up in AWS Backup. Choose our DynamoDB table resource.
+
+![Scheduled Backup 11](/images/1/1.4/1.4.4/11.png)
+
+2. Choose the recovery point ID of the resource. Click on **Restore**. _Note: If you do not see a recovery point, you can click "Create an on-demand backup" and complete the backup. For the purposes of this lab, you need a completed backup to continue, and you may not want to wait for your backup plan's scheduled backup._
+
+![Scheduled Backup 12](/images/1/1.4/1.4.4/12.png)
+
+3. Provide new DynamoDB table name. Leave all the settings on the defaults and click **Restore backup**
+
+![Scheduled Backup 13](/images/1/1.4/1.4.4/13.png)
+
+The **Restore jobs** pane appears. A message at the top of the page provides information about the restore job. You can see job status is running.After some time you can see status changes to completed
+
+![Scheduled Backup 14](/images/1/1.4/1.4.4/14.png)
+
+You can also monitor the all backup and restore jobs in central dashboard.
+
+![Scheduled Backup 15](/images/1/1.4/1.4.4/15.png)
+
+To see the restored table, go to the [DynamoDB Console](https://console.aws.amazon.com/dynamodbv2/)  and click on _Tables_ from the side menu.Choose _ProductCatalogRestored_ table. You can see the table is restored along with data.
+
+![Scheduled Backup 16](/images/1/1.4/1.4.4/16.png)

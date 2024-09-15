@@ -6,61 +6,72 @@ chapter : false
 pre : " <b> 1.5.4. </b> "
 ---
 
+**IMDb** [(Internet Movie Database)](https://www.imdb.com/interfaces/) là một trong những tên tuổi nổi tiếng nhất với bộ sưu tập cơ sở dữ liệu trực tuyến toàn diện về phim, phim truyền hình, series TV, và nhiều hơn nữa. Bài tập này sẽ sử dụng một phần của bộ dữ liệu IMDb (có sẵn ở định dạng TSV). Workshop này sẽ sử dụng 6 bộ dữ liệu IMDb liên quan đến các bộ phim ở Mỹ kể từ năm 2000. Bộ dữ liệu này có khoảng hơn 106.000 phim, đánh giá, bình chọn và thông tin về dàn diễn viên/đội ngũ sản xuất.
 
-IMDb [(Cơ sở dữ liệu phim Internet)](https://www.imdb.com/interfaces/)  là một trong những cái tên được công nhận nhất với bộ sưu tập cơ sở dữ liệu trực tuyến toàn diện về phim, phim, phim truyền hình, v.v. Bài tập sẽ sử dụng tập hợp con của tập dữ liệu IMDb (có sẵn ở định dạng TSV). Hội thảo này sẽ sử dụng 6 bộ dữ liệu IMDb có liên quan đến các bộ phim dựa trên Hoa Kỳ kể từ năm 2000. Bộ dữ liệu có khoảng 106K + phim, xếp hạng, phiếu bầu và thông tin diễn viên / đoàn làm phim.
+Mẫu CloudFormation đã khởi chạy một phiên bản Amazon Linux 2 EC2 với MySQL đã được cài đặt và chạy. Nó đã tạo cơ sở dữ liệu IMDb, 6 bảng mới (mỗi bảng cho một bộ dữ liệu IMDb), tải các tệp TSV IMDb vào thư mục cục bộ trên máy chủ MySQL và tải các tệp này vào 6 bảng mới. Để khám phá bộ dữ liệu, hãy làm theo các hướng dẫn dưới đây để đăng nhập vào máy chủ EC2. Mẫu này cũng đã cấu hình một người dùng MySQL từ xa dựa trên tham số đầu vào của CloudFormation.
 
-Mẫu CloudFormation đã khởi chạy phiên bản EC2 Amazon Linux 2 với MySQL được cài đặt và chạy. Nó đã tạo cơ sở dữ liệu imdb, 6 bảng mới (một cho mỗi tập dữ liệu IMDb), tải xuống các tệp IMDb TSV vào thư mục cục bộ của máy chủ MySQL và tải các tệp lên 6 bảng mới. Để khám phá tập dữ liệu, hãy làm theo hướng dẫn bên dưới để đăng nhập máy chủ EC2. Nó cũng đã cấu hình người dùng MySQL từ xa dựa trên tham số đầu vào CloudFormation.
-
-1. Đi tới [Bảng điều khiển EC2](https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#Instances:instanceState=running) 
-2. Chọn MySQL-Instance và nhấp vào Connect ![Kiến trúc triển khai cuối cùng](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/migration9.jpg)
-3. Đảm bảo ec2-user được điền vào trường Tên người dùng. Nhấp vào Kết nối ![Kiến trúc triển khai cuối cùng](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/migration10.jpg)
-4. Nâng cao đặc quyền của bạn bằng lệnh sudo
+1. Truy cập [EC2 console](https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#Instances:instanceState=running)
+2. Chọn **MySQL-Instance** và nhấp vào **Connect**.  
+   ![Kiến trúc Triển khai Cuối cùng](/images/1/1.5/7.jpg)
+3. Đảm bảo **ec2-user** đã được điền vào trường **User name**. Nhấp vào **Connect**.  
+   ![Kiến trúc Triển khai Cuối cùng](/images/1/1.5/8.jpg)
+4. Tăng quyền hạn của bạn bằng cách sử dụng lệnh sudo:
     
     ```bash
-      sudo su
+    sudo su
     ```
     
-    ![Kiến trúc triển khai cuối cùng](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/migration11.jpg)
-5. Chuyển đến thư mục tệp
+   ![Kiến trúc Triển khai Cuối cùng](/images/1/1.5/9.jpg)
+
+5. Truy cập vào thư mục tệp:
     
     ```bash
-      cd /var/lib/mysql-files/
-      ls -lrt
+    cd /var/lib/mysql-files/
+    ls -lrt
     ```
     
-6. Bạn có thể xem tất cả 6 tệp được sao chép từ tập dữ liệu IMDB vào thư mục EC2 cục bộ ![Kiến trúc triển khai cuối cùng](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/migration12.jpg)
-7. Hãy thoải mái khám phá các tệp.
-8. Truy cập AWS CloudFormation [Ngăn xếp](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks?filteringStatus=active&filteringText=&viewNested=true&hideStacks=false)  và nhấp vào ngăn xếp bạn đã tạo trước đó. Chuyển đến tab Tham số và sao chép tên người dùng và mật khẩu được đề cập bên cạnh DbMasterUsername &; DbMasterPassword; ![Kiến trúc triển khai cuối cùng](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/migration13.jpg)
-9. Quay lại bảng điều khiển EC2 Instance và đăng nhập vào mysql
+6. Bạn có thể thấy tất cả 6 tệp được sao chép từ bộ dữ liệu IMDB vào thư mục cục bộ của EC2.  
+   ![Kiến trúc Triển khai Cuối cùng](/images/1/1.5/10.jpg)
+
+7. Hãy thoải mái khám phá các tệp này.
+8. Truy cập [AWS CloudFormation Stacks](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks?filteringStatus=active&filteringText=&viewNested=true&hideStacks=false) và nhấp vào stack bạn đã tạo trước đó. Truy cập tab **Parameters** và sao chép tên người dùng và mật khẩu được đề cập bên cạnh **DbMasterUsername** và **DbMasterPassword**.  
+   ![Kiến trúc Triển khai Cuối cùng](/images/1/1.5/11.jpg)
+
+9. Quay lại bảng điều khiển EC2 Instance và đăng nhập vào MySQL:
 
 ```bash
 mysql -u DbMasterUsername -pDbMasterPassword
 ```
 
-![Kiến trúc triển khai cuối cùng](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/migration14.jpg) 10. Xin chúc mừng! Bây giờ bạn đã kết nối với cơ sở dữ liệu nguồn MySQL tự quản lý trên EC2. Trong các bước tiếp theo, chúng ta sẽ khám phá cơ sở dữ liệu và bảng lưu trữ bộ dữ liệu IMDb
+![Kiến trúc Triển khai Cuối cùng](/images/1/1.5/12.jpg)  
+
+10. Chúc mừng bạn! Bạn đã kết nối thành công với cơ sở dữ liệu MySQL tự quản lý trên EC2. Ở các bước tiếp theo, chúng ta sẽ khám phá cơ sở dữ liệu và các bảng lưu trữ bộ dữ liệu IMDb:
 
 ```bash
 use imdb;
 ```
 
-![Kiến trúc triển khai cuối cùng](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/migration15.jpg) 11. Hiển thị tất cả các bảng đã tạo;
+![Kiến trúc Triển khai Cuối cùng](/images/1/1.5/13.jpg)  
+
+11. Hiển thị tất cả các bảng đã được tạo:
 
 ```bash
 show tables;
 ```
 
-![Kiến trúc triển khai cuối cùng](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/migration16.jpg)
+![Kiến trúc Triển khai Cuối cùng](/images/1/1.5/14.jpg)
 
-Đối với mục đích minh họa, dưới đây là sơ đồ logic thể hiện mối quan hệ giữa các bảng nguồn khác nhau lưu trữ tập dữ liệu IMDb.
+Để minh họa, dưới đây là sơ đồ logic thể hiện mối quan hệ giữa các bảng nguồn lưu trữ bộ dữ liệu IMDb:
 
-- `title_basics` bảng có phim được xuất bản ở Mỹ sau năm 2000. là một khóa chữ và số được gán duy nhất cho mỗi bộ phim.`tconst`
-- `title_akas` đã xuất bản các khu vực, ngôn ngữ và tiêu đề phim tương ứng. Đó là mối quan hệ 1:nhiều với bàn.`title_basics`
-- `title_ratings` có xếp hạng phim và số phiếu bầu. Đối với bài tập này, chúng ta có thể giả định thông tin có tần suất cập nhật cao sau khi phát hành phim. Nó liên quan đến 1: 1 với bảng`title_basics`
-- `title_principals` đã có thông tin về dàn diễn viên và đoàn làm phim. Đó là mối quan hệ 1:nhiều với bàn.`title_basics`
-- `title_crew` có thông tin biên kịch và đạo diễn. Bảng này có liên quan đến bảng 1: 1.`title_basics`
-- `name_basics` có chi tiết diễn viên và đoàn làm phim. Mỗi thành viên có giá trị duy nhất được chỉ định. `nconst`![Kiến trúc triển khai cuối cùng](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/migration31.jpg)
+- Bảng `title_basics` chứa các phim được phát hành ở Mỹ sau năm 2000. `tconst` là một khóa chữ-số duy nhất được gán cho mỗi bộ phim.
+- Bảng `title_akas` chứa các vùng phát hành, ngôn ngữ và tiêu đề phim tương ứng. Đây là mối quan hệ 1:n với bảng `title_basics`.
+- Bảng `title_ratings` chứa đánh giá phim và số phiếu bầu. Đối với bài tập này, chúng ta có thể giả định thông tin này được cập nhật với tần suất cao sau khi phim được phát hành. Đây là mối quan hệ 1:1 với bảng `title_basics`.
+- Bảng `title_principals` chứa thông tin về dàn diễn viên và đội ngũ sản xuất. Đây là mối quan hệ 1:n với bảng `title_basics`.
+- Bảng `title_crew` chứa thông tin về biên kịch và đạo diễn. Bảng này có mối quan hệ 1:1 với bảng `title_basics`.
+- Bảng `name_basics` chứa chi tiết về dàn diễn viên và đội ngũ sản xuất. Mỗi thành viên có giá trị `nconst` duy nhất được gán.  
+  ![Kiến trúc Triển khai Cuối cùng](/images/1/1.5/15.jpg)
 
-12. Chúng tôi sẽ tạo chế độ xem không chuẩn hóa với thông tin tĩnh 1:1 và chuẩn bị sẵn sàng để di chuyển sang bảng Amazon DynamoDB. Bây giờ, hãy tiếp tục và sao chép mã bên dưới và dán vào dòng lệnh MySQL. Các chi tiết xung quanh mô hình dữ liệu mục tiêu sẽ được thảo luận trong chương tiếp theo.
+12. Chúng ta sẽ tạo một view đã phi chuẩn hóa với thông tin tĩnh 1:1 và chuẩn bị sẵn sàng để di chuyển sang bảng Amazon DynamoDB. Bây giờ, hãy sao chép và dán đoạn mã dưới đây vào dòng lệnh MySQL. Chi tiết về mô hình dữ liệu mục tiêu sẽ được thảo luận trong chương tiếp theo.
 
 ```bash
 CREATE VIEW imdb.movies AS\
@@ -90,7 +101,7 @@ CREATE VIEW imdb.movies AS\
     LEFT JOIN imdb.title_crew tc ON tc.tconst = tp.tconst;
 ```
 
-Sử dụng lệnh bên dưới để xem lại số lượng bản ghi từ dạng xem không chuẩn hóa. Tại thời điểm này, cơ sở dữ liệu nguồn của bạn đã sẵn sàng để di chuyển sang Amazon DynamoDB.
+Sử dụng lệnh dưới đây để xem số lượng bản ghi từ view đã phi chuẩn hóa. Ở thời điểm này, cơ sở dữ liệu nguồn của bạn đã sẵn sàng để di chuyển sang Amazon DynamoDB.
 
 ```bash
 select count(*) from imdb.movies;

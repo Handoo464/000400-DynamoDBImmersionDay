@@ -6,14 +6,15 @@ chapter : false
 pre : " <b> 1.3.4. </b> "
 ---
 
-### Inserting Data
+## Chèn Dữ Liệu
 
-The DynamoDB [PutItem API](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutItem.html)  được sử dụng để tạo một mục mới hoặc thay thế hoàn toàn các mục hiện có bằng một mục mới. Nó được gọi bằng [put-item CLI command](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/put-item.html) .
+DynamoDB cung cấp [API PutItem](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutItem.html) để tạo một mục mới hoặc thay thế hoàn toàn các mục hiện có bằng một mục mới. Nó được gọi bằng [lệnh CLI put-item](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/put-item.html).
 
-Giả sử chúng ta muốn chèn một mục mới vào bảng **Reply** từ bảng điều khiển. Đầu tiên, điều hướng đến bảng **Reply** và nhấn nút **Create Item**.
+Giả sử chúng ta muốn chèn một mục mới vào bảng **Reply** từ giao diện điều khiển. Đầu tiên, điều hướng đến bảng **Reply** và nhấp vào nút **Create Item** (Tạo Mục).
 
-![Console Create Item 1](/images/1/1.3/15.png)
-Nhấn vào chế độ **JSON view**, đảm bảo rằng tùy chọn **View DynamoDB JSON** không được chọn, sau đó dán JSON sau và nhấn **Create Item** để chèn mục mới.
+![Tạo Mục trên Console 1](/images/1/1.3/15.png)
+
+Nhấp vào **`JSON view`**, đảm bảo rằng **`View DynamoDB JSON`** chưa được chọn, dán JSON sau và sau đó nhấp vào **Create Item** để chèn mục mới.
 
 ```json
 {
@@ -24,13 +25,15 @@ Nhấn vào chế độ **JSON view**, đảm bảo rằng tùy chọn **View 
 }
 ```
 
-![Console Create Item 2](/images/1/1.3/16.png)
-## Updating or Deleting Data
-DynamoDB [UpdateItem API](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateItem.html)  được sử dụng để tạo một mục mới hoặc để thay thế hoàn toàn các mục hiện có bằng một mục mới. Nó được gọi bằng [update-item CLI command](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/update-item.html) . API này yêu cầu bạn chỉ định đầy đủ Khóa chính và có thể sửa đổi chọn lọc các thuộc tính cụ thể mà không thay đổi các thuộc tính khác (bạn không cần phải cung cấp toàn bộ mục).
+![Tạo Mục trên Console 2](/images/1/1.3/16.png)
 
-The DynamoDB [DeleteItem API](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DeleteItem.html)  được sử dụng để xóa một mục. Nó được gọi bằng [delete-item CLI command](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/delete-item.html) .
 
-Bạn có thể dễ dàng chỉnh sửa hoặc xóa một mục bằng cách chọn ô kiểm bên cạnh mục quan tâm, nhấn vào menu **Actions** và thực hiện thao tác mong muốn.
+## Cập Nhật hoặc Xóa Dữ Liệu
 
-![Console Delete Item](/images/1/1.3/17.png)
+DynamoDB cung cấp [API UpdateItem](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateItem.html) để tạo một mục mới hoặc thay thế hoàn toàn các mục hiện có bằng một mục mới. Nó được gọi bằng [lệnh CLI update-item](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/update-item.html). API này yêu cầu bạn phải chỉ định đầy đủ Khóa Chính và có thể tùy chọn sửa đổi các thuộc tính cụ thể mà không thay đổi các thuộc tính khác (bạn không cần phải truyền toàn bộ mục).
 
+DynamoDB cung cấp [API DeleteItem](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DeleteItem.html) để xóa một mục. Nó được gọi bằng [lệnh CLI delete-item](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/delete-item.html).
+
+Bạn có thể dễ dàng sửa đổi hoặc xóa một mục bằng cách sử dụng giao diện điều khiển bằng cách chọn hộp kiểm bên cạnh mục bạn quan tâm, nhấp vào menu thả xuống **Actions** (Hành động) và thực hiện hành động mong muốn.
+
+![Xóa Mục trên Console](/images/1/1.3/17.png)
