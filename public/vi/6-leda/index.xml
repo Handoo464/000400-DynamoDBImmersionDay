@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>LEDA: Xây dựng Kiến trúc Serverless Event Driven với DynamoDB on DYNAMODB IMMERSION DAY</title>
-    <link>https://handoo464.github.io/000400-DynamoDBImmersionDay/vi/6-leda/</link>
+    <link>//localhost:1313/vi/6-leda/</link>
     <description>Recent content in LEDA: Xây dựng Kiến trúc Serverless Event Driven với DynamoDB on DYNAMODB IMMERSION DAY</description>
     <generator>Hugo</generator>
     <language>vi</language>
-    <atom:link href="https://handoo464.github.io/000400-DynamoDBImmersionDay/vi/6-leda/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/vi/6-leda/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
