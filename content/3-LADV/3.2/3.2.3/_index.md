@@ -1,7 +1,7 @@
 ---
 title : "Step 3 - Load a larger file to compare the execution times"
 date : "`r Sys.Date()`"
-weight : 1
+weight : 3
 chapter : false
 pre : " <b> 3.2.3. </b> "
 ---

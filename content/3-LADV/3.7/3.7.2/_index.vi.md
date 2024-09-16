@@ -1,5 +1,5 @@
 ---
-title : "Step 2 - Query all the employees from a state"
+title : "Bước 2 - Truy vấn tất cả nhân viên (employees) từ tiểu bang (state)"
 date :  "`r Sys.Date()`" 
 weight : 2
 chapter : false

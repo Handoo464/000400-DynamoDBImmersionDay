@@ -3,7 +3,7 @@ title : "Bước 2 - Xem lại chính sách AWS IAM cho vai trò IAM"
 date :  "`r Sys.Date()`" 
 weight : 2
 chapter : false
-pre : " <b> 3.8.2. </b> "
+pre : " <b> 3.9.2. </b> "
 ---
 Chúng tôi đã tạo trước vai trò IAM sẽ được sử dụng làm `DDBReplicationRole`[Vai trò thực thi AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html) . Vai trò IAM này cho phép cung cấp một số quyền đối với hàm AWS Lambda mà chúng tôi sẽ cần để sao chép dữ liệu.
 

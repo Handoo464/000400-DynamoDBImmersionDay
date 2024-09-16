@@ -1,5 +1,5 @@
 ---
-title : "Kết nối đến máy chủ Public"
+title : "Bước 3 - Quét bảng employees để tìm người quản lý bằng cách sử dụng sparse global secondary index"
 date :  "`r Sys.Date()`" 
 weight : 3
 chapter : false

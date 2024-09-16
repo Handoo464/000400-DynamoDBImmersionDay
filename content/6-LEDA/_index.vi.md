@@ -1,9 +1,9 @@
 ---
 title : "LEDA: Xây dựng Kiến trúc Serverless Event Driven với DynamoDB"
 date :  "`r Sys.Date()`" 
-weight : 5
+weight : 6
 chapter : false
-pre : " <b> 5. </b> "
+pre : " <b> 6. </b> "
 ---
 
 Trong workshop này, bạn sẽ được giới thiệu với một pipeline tổng hợp dữ liệu dựa trên sự kiện không máy chủ. Pipeline này được xây dựng với [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html), [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html), và [Amazon Kinesis Data Streams](https://docs.aws.amazon.com/streams/latest/dev/introduction.html).

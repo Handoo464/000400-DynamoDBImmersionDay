@@ -1,7 +1,7 @@
 ---
-title : "Exercise 1: DynamoDB Capacity Units và Partitioning"
+title : "Bài tập 1: DynamoDB Capacity Units và Partitioning"
 date :  "`r Sys.Date()`" 
-weight : 1 
+weight : 2
 chapter : false
 pre : " <b> 3.2. </b> "
 ---

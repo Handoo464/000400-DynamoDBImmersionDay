@@ -3,7 +3,7 @@ title : "Đọc Item Collections sử dụng Query"
 date :  "`r Sys.Date()`" 
 weight : 2
 chapter : false
-pre : " <b> 2.1.1 </b> "
+pre : " <b> 1.2.2. </b> "
 ---
 
 

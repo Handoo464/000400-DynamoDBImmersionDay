@@ -3,7 +3,7 @@ title : "Mô phỏng cập nhật đơn hàng"
 date :  "`r Sys.Date()`" 
 weight : 5
 chapter : false
-pre : " <b> 4.5. </b> "
+pre : " <b> 4.3.5. </b> "
 ---
 
 Sau khi tạo bảng Orders, bạn đã tải lên một số đơn hàng mẫu vào bảng. Hãy khám phá các mặt hàng trên bảng Orders trước khi mô phỏng bất kỳ cập nhật nào đối với các đơn hàng trên bảng.

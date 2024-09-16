@@ -3,7 +3,7 @@ title : "Bước 5 - Ánh xạ luồng nguồn tới hàm Lambda"
 date :  "`r Sys.Date()`" 
 weight : 5
 chapter : false
-pre : " <b> 3.8.5. </b> "
+pre : " <b> 3.9.5. </b> "
 ---
 
 Đến nay, bạn đã có bảng nguồn với DynamoDB Streams được kích hoạt và hàm Lambda. Bây giờ bạn cần ánh xạ stream nguồn đến hàm Lambda. Bạn cần sao chép ARN từ bước trước và dán nó vào lệnh sau trước khi chạy lệnh.

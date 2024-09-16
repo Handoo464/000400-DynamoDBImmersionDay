@@ -1,9 +1,9 @@
 ---
 title : "Bước 3 - Tạo hàm Lambda"
 date :  "`r Sys.Date()`" 
-weight : 1 
+weight : 3
 chapter : false
-pre : " <b> 3.1. </b> "
+pre : " <b> 3.9.3. </b> "
 ---
 
 Hàm AWS Lambda này sẽ được gắn vào DynamoDB Stream của bảng `logfile` để sao chép các thao tác thêm (put) và xóa (delete) mục vào bảng `logfile_replica`. Mã hàm Lambda đã được cung cấp cho bạn trong tệp `ddbreplica_lambda.py`. Bạn có thể xem nội dung của script nếu muốn với `vim` hoặc `less`.

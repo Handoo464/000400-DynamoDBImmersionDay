@@ -1,9 +1,9 @@
 ---
 title : "LMR: Build and Deploy a Global Serverless Application with Amazon DynamoDB"
 date :  "`r Sys.Date()`" 
-weight : 6
+weight : 5
 chapter : false
-pre : " <b> 6. </b> "
+pre : " <b> 5. </b> "
 ---
 
 In this workshop you will learn how to build and deploy a globally distributed serverless application and get experience with using Amazon DynamoDB Global Tables to replicate data across AWS Regions.

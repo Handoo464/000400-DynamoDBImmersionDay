@@ -3,7 +3,7 @@ title : "Bước 6 - Điền vào bảng logfile và xác minh sao chép để l
 date :  "`r Sys.Date()`" 
 weight : 6
 chapter : false
-pre : " <b> 3.8.6. </b> "
+pre : " <b> 3.9.6. </b> "
 ---
 
 Chạy đoạn mã Python sau để tải thêm các mục vào bảng `logfile`. Các hàng sẽ được sao chép vào DynamoDB stream, được xử lý bởi hàm AWS Lambda, và sau đó được ghi vào bảng `logfile_replica` cuối cùng.

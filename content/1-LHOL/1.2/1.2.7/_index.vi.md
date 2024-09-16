@@ -1,9 +1,9 @@
 ---
-title : "Tạo VPC "
+title : "Global Secondary Indexes"
 date :  "`r Sys.Date()`" 
-weight : 1 
+weight : 7
 chapter : false
-pre : " <b> 2.1.1 </b> "
+pre : " <b> 1.2.7. </b> "
 ---
 
 Chúng ta đã chú ý đến việc truy cập dữ liệu dựa trên các thuộc tính khóa cho đến nay. Nếu chúng ta muốn tìm kiếm các mục dựa trên các thuộc tính không phải khóa, chúng ta phải thực hiện quét toàn bộ bảng và sử dụng điều kiện lọc để tìm những gì chúng ta muốn, điều này vừa chậm vừa tốn kém cho các hệ thống hoạt động ở quy mô lớn.

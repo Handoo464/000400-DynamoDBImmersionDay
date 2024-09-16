@@ -3,7 +3,7 @@ title : "Bật Kinesis Data Streams"
 date :  "`r Sys.Date()`" 
 weight : 1 
 chapter : false
-pre : " <b> 4.1 </b> "
+pre : " <b> 4.4.1. </b> "
 ---
 
 Tắt DynamoDB streams cho bảng Orders bằng cách sử dụng các lệnh AWS CLI dưới đây.

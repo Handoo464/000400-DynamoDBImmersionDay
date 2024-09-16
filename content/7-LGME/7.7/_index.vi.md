@@ -1,7 +1,7 @@
 ---
 title : "Tóm tắt và dọn dẹp tài nguyên"
 date :  "`r Sys.Date()`" 
-weight : 1 
+weight : 7
 chapter : false
 pre : " <b> 7.7. </b> "
 ---
@@ -44,7 +44,3 @@ Nếu bạn đang chạy lab này trong Tài khoản AWS của riêng mình (kh�
 {{%notice warning%}}
 Nếu bạn đang thực hiện lab trong Tài khoản AWS của mình, bạn sẽ tạo các bảng DynamoDB mà sẽ phát sinh chi phí có thể lên đến hàng chục hoặc hàng trăm đô la mỗi ngày. **Hãy đảm bảo xóa các bảng DynamoDB bằng cách sử dụng bảng điều khiển DynamoDB và chắc chắn rằng bạn [xóa môi trường Cloud9](https://docs.aws.amazon.com/cloud9/latest/user-guide/delete-environment.html) ngay khi hoàn thành lab.**
 {{%/notice%}}
-
----
-
-Hy vọng bản dịch này sẽ giúp bạn dễ dàng hơn trong việc dọn dẹp các tài nguyên AWS sau khi hoàn thành lab.

@@ -1,5 +1,5 @@
 ---
-title : "5. Tóm tắt và dọn dẹp"
+title : "Tóm tắt và dọn dẹp"
 date :  "`r Sys.Date()`" 
 weight : 5
 chapter : false

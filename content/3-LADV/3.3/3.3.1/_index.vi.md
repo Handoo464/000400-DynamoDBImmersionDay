@@ -1,5 +1,5 @@
 ---
-title : "Kết nối đến máy chủ Public"
+title : "Bước 1 - Thực hiện quét tuần tự"
 date :  "`r Sys.Date()`" 
 weight : 1 
 chapter : false

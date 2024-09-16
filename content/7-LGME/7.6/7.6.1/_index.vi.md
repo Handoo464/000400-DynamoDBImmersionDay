@@ -1,7 +1,7 @@
 ---
 title : "Thêm chỉ mục đảo ngược"
 date :  "`r Sys.Date()`" 
-weight : 6
+weight : 1
 chapter : false
 pre : " <b> 7.6.1. </b> "
 ---

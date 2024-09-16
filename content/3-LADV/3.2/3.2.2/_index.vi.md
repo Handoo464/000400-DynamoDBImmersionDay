@@ -1,9 +1,9 @@
 ---
-title : "Kết nối đến máy chủ Public"
+title : "Bước 2 - Tải mẫu data vào bảng"
 date :  "`r Sys.Date()`" 
-weight : 1 
+weight : 2
 chapter : false
-pre : " <b> 3.1. </b> "
+pre : " <b> 3.2.2. </b> "
 ---
 Bây giờ bạn đã tạo bảng, bạn có thể tải một số dữ liệu mẫu vào bảng bằng cách chạy tập lệnh Python sau.
 

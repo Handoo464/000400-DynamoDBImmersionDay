@@ -1,9 +1,9 @@
 ---
 title : "Bước 3 - Truy vấn chi tiết hóa đơn của bảng"
 date :  "`r Sys.Date()`" 
-weight : 1 
+weight : 3
 chapter : false
-pre : " <b> 3.1. </b> "
+pre : " <b> 3.8.3. </b> "
 ---
 Chạy tập lệnh sau để truy vấn chi tiết hóa đơn của bảng.
 

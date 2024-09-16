@@ -1,9 +1,9 @@
 ---
 title : "Tóm tắt: Kết luận"
 date :  "`r Sys.Date()`" 
-weight : 1
+weight : 5
 chapter : false
-pre : " <b> </b> "
+pre : " <b> 6.5. </b> "
 ---
 
 ## Chúc mừng bạn

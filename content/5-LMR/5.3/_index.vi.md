@@ -1,5 +1,5 @@
 ---
-title : "Mô-đun 2: Khám phá Global Tables"
+title : "Module 2: Khám phá Global Tables"
 date :  "`r Sys.Date()`" 
 weight : 3
 chapter : false

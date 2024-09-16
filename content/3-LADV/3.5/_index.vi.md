@@ -1,5 +1,5 @@
 ---
-title : "Bài tập 4: Quá tải Global Secondary Index"
+title : "Bài tập 4: Global Secondary Index Quá tải"
 date :  "`r Sys.Date()`" 
 weight : 5
 chapter : false

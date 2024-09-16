@@ -1,5 +1,5 @@
 ---
-title : "Bài tập 5: Global Secondary Indexes thưa thớt"
+title : "Bài tập 5: Sparse Global Secondary Indexes"
 date :  "`r Sys.Date()`" 
 weight : 6
 chapter : false

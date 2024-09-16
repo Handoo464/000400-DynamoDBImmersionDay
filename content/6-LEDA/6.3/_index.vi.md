@@ -1,9 +1,9 @@
 ---
 title : "Lab 1: Kết nối pipeline"
 date :  "`r Sys.Date()`" 
-weight : 1 
+weight : 3
 chapter : false
-pre : " <b> 1.1. </b> "
+pre : " <b> 6.3. </b> "
 ---
 
 ### Hãy tìm hiểu sâu về các nguồn dữ liệu phát trực tuyến với AWS Lambda!

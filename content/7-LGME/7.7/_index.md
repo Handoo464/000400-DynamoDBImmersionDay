@@ -1,9 +1,9 @@
 ---
 title : "Summary & Cleanup"
 date : "`r Sys.Date()`"
-weight : 1
+weight : 7
 chapter : false
-pre : " <b> 1.1.1. </b> "
+pre : " <b> 7.7. </b> "
 ---
 
 In the previous modules, the following access patterns in the gaming application were handled:

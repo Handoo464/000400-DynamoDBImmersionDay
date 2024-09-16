@@ -3,7 +3,7 @@ title : "Tổng quan"
 date :  "`r Sys.Date()`" 
 weight : 2
 chapter : false
-pre : " <b> 6.2.1. </b> "
+pre : " <b> 6.2. </b> "
 ---
 
 ## Kiến trúc

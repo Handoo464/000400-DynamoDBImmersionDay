@@ -3,7 +3,7 @@ title : "Bước 1 - Tạo bảng bản sao"
 date :  "`r Sys.Date()`" 
 weight : 1 
 chapter : false
-pre : " <b> 3.8.1. </b> "
+pre : " <b> 3.9.1. </b> "
 ---
 ![Luồng DynamoDB với Lambda](https://static.us-east-1.prod.workshops.aws/public/c768eb2c-360b-491e-8422-bfd253e11581/static/images/image6.jpg)
 

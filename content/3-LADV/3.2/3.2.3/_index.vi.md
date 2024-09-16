@@ -1,9 +1,9 @@
 ---
 title : "Bước 3 - Tải tệp lớn hơn để so sánh thời gian thực thi"
 date :  "`r Sys.Date()`" 
-weight : 1 
+weight : 3
 chapter : false
-pre : " <b> 3.1. </b> "
+pre : " <b> 3.2.3. </b> "
 ---
 Chạy lại tập lệnh, nhưng lần này sử dụng tệp dữ liệu đầu vào lớn hơn.
 

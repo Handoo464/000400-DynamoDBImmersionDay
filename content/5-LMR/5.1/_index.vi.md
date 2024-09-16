@@ -1,5 +1,5 @@
 ---
-title : "Getting Started"
+title : "Bắt đầu"
 date :  "`r Sys.Date()`" 
 weight : 1
 chapter : false

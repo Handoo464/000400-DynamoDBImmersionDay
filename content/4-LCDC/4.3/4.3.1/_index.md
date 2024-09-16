@@ -1,4 +1,4 @@
-  ---
+---
 title : "Enable DynamoDB Streams"
 date : "`r Sys.Date()`"
 weight : 1

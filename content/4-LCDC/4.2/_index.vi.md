@@ -1,5 +1,5 @@
 ---
-title : "2. Tổng quan kịch bản"
+title : "Tổng quan kịch bản"
 date :  "`r Sys.Date()`" 
 weight : 2
 chapter : false

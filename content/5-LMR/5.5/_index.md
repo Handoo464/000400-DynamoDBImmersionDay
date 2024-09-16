@@ -3,7 +3,7 @@ title : "Global Tables Discussion Topics"
 date :  "`r Sys.Date()`" 
 weight : 5
 chapter : false
-pre : " <b>  </b> "
+pre : " <b> 5.5. </b> "
 ---
 Below are some discussion topics for people who’ve finished the development work or would like to discuss interesting aspects of Global Tables with a DynamoDB specialist.
 

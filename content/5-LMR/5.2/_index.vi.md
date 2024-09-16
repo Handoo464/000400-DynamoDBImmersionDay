@@ -1,5 +1,5 @@
 ---
-title : "Mô-đun 1: Triển khai các tài nguyên phụ trợ"
+title : "Module 1: Triển khai các tài nguyên phụ trợ"
 date :  "`r Sys.Date()`" 
 weight : 2
 chapter : false

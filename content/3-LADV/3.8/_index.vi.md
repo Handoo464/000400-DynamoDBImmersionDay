@@ -3,7 +3,7 @@ title : "Bài tập 7: Adjacency Lists"
 date :  "`r Sys.Date()`" 
 weight : 7
 chapter : false
-pre : " <b> 3.7. </b> "
+pre : " <b> 3.8. </b> "
 ---
 
 Khi các thực thể khác nhau của một ứng dụng có mối quan hệ **nhiều-nhiều** (many-to-many), việc mô hình hóa mối quan hệ này dưới dạng một danh sách liền kề (adjacency list) sẽ dễ dàng hơn. Trong mô hình này, tất cả các thực thể cấp cao nhất (đồng nghĩa với các nút trong mô hình đồ thị) được biểu diễn như là khóa phân vùng (partition key). Mọi mối quan hệ với các thực thể khác (các cạnh trong đồ thị) được biểu diễn như một mục trong phân vùng bằng cách đặt giá trị của khóa sắp xếp (sort key) thành ID của thực thể mục tiêu (nút mục tiêu).

@@ -1,9 +1,9 @@
-  ---
+---
 title : "Enable Kinesis Data Streams"
 date : "`r Sys.Date()`"
 weight : 1
 chapter : false
-pre : " <b> 4.1 </b> "
+pre : " <b> 4.4.1. </b> "
 ---
 
 Disable DynamoDB streams for the Orders table using the AWS CLI commands below.

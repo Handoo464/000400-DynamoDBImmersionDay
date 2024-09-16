@@ -1,7 +1,7 @@
 ---
-title : "Step 2 - Load sample data into the tablee"
+title : "Step 2 - Load sample data into the table"
 date : "`r Sys.Date()`"
-weight : 1
+weight : 2
 chapter : false
 pre : " <b> 3.2.2. </b> "
 ---

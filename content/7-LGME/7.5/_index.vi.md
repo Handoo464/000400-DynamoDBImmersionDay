@@ -3,7 +3,7 @@ title : "Tham gia và đóng trò chơi"
 date : "`r Sys.Date()`"
 weight : 5
 chapter : false
-pre : " <b> 7.5.2. </b> "
+pre : " <b> 7.5. </b> "
 ---
 
 Qua các module trước trong bài lab này, bạn đã thỏa mãn các mẫu truy cập cho việc tạo và truy xuất các thực thể cốt lõi trong ứng dụng game, chẳng hạn như `Users` và `Games`. Bạn cũng đã sử dụng một GSI thưa (sparse GSI) để tìm các game mở mà người dùng có thể tham gia.

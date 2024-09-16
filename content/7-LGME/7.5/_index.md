@@ -3,7 +3,7 @@ title : "Join and close games"
 date : "`r Sys.Date()`"
 weight : 5
 chapter : false
-pre : " <b> 7.5.2. </b> "
+pre : " <b> 7.5. </b> "
 ---
 Through the earlier modules in this lab, you have satisfied the access patterns for the creation and retrieval of core entities in the gaming application, such as `Users` and `Games`. You also used a sparse GSI to find open games that users can join.
 

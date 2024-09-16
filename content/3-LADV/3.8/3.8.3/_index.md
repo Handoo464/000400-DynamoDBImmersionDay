@@ -1,9 +1,9 @@
 ---
 title : "Step 3 - Query the table's invoice details"
 date : "`r Sys.Date()`"
-weight : 1
+weight : 3
 chapter : false
-pre : " <b> 3.1. </b> "
+pre : " <b> 3.8.3. </b> "
 ---
 Run the following script to query the table’s invoice details.
 

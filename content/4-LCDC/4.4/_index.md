@@ -1,5 +1,5 @@
 ---
-title : "4. Change Data Capture using Kinesis Data Streams"
+title : "Change Data Capture using Kinesis Data Streams"
 date : "`r Sys.Date()`"
 weight : 4
 chapter : false

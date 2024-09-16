@@ -1,7 +1,7 @@
 ---
-title : "Bước 3 - Truy vấn tất cả nhân viên của một thành phố"
+title : "Bước 3 - Truy vấn tất cả nhân viên (employees) của một thành phố (city)"
 date :  "`r Sys.Date()`" 
-weight : 1 
+weight : 3
 chapter : false
 pre : " <b> 3.7.3. </b> "
 ---

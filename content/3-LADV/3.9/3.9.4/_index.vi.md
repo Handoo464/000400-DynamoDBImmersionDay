@@ -3,7 +3,7 @@ title : "Bước 4 - Bật luồng DynamoDB"
 date :  "`r Sys.Date()`" 
 weight : 4
 chapter : false
-pre : " <b> 3.8.4. </b> "
+pre : " <b> 3.9.4. </b> "
 ---
 
 Bây giờ chúng ta đã tạo một hàm AWS Lambda để xử lý các bản ghi từ DynamoDB Streams, chúng ta cần kích hoạt DynamoDB Stream trên bảng `logfile`. Trong bước tiếp theo, chúng ta sẽ kết nối stream với hàm Lambda.

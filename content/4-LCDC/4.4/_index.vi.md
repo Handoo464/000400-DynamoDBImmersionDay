@@ -1,5 +1,5 @@
 ---
-title : "4. Thay đổi tính năng Thu thập dữ liệu bằng Kinesis Data Streams"
+title : "Thay đổi tính năng Thu thập dữ liệu bằng Kinesis Data Streams"
 date :  "`r Sys.Date()`" 
 weight : 4
 chapter : false

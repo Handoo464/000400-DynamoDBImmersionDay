@@ -1,7 +1,7 @@
 ---
 title : "Lab 1: Connect the pipeline"
 date : "`r Sys.Date()`"
-weight : 1
+weight : 3
 chapter : false
 pre : " <b> 6.3. </b> "
 ---

@@ -1,7 +1,7 @@
 ---
-title : "Kết nối đến máy chủ Public"
+title : "Bước 4- Truy vấn tất cả nhân viên (employees) của một thành phố (city) và một phòng ban (department) cụ thể"
 date :  "`r Sys.Date()`" 
-weight : 1 
+weight : 4
 chapter : false
 pre : " <b> 3.7.4. </b> "
 ---

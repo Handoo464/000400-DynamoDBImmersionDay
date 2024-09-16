@@ -1,5 +1,5 @@
 ---
-title : "Step 1 - Create a new global secondary index for City-Department"
+title : "Bước 1 - Tạo global secondary index mới cho City-Department"
 date :  "`r Sys.Date()`" 
 weight : 1 
 chapter : false

@@ -3,7 +3,7 @@ title : "Thảo luận chủ đề Global Tables "
 date :  "`r Sys.Date()`" 
 weight : 5
 chapter : false
-pre : " <b>  </b> "
+pre : " <b> 5.5. </b> "
 ---
 
 Dưới đây là một số chủ đề thảo luận dành cho những người đã hoàn thành công việc phát triển hoặc muốn thảo luận về các khía cạnh thú vị của Global Tables với chuyên gia DynamoDB.

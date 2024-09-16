@@ -3,7 +3,7 @@ title : "Overview"
 date : "`r Sys.Date()`"
 weight : 2
 chapter : false
-pre : " <b> 6.2.1. </b> "
+pre : " <b> 6.2. </b> "
 ---
 
 ## Architecture

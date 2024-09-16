@@ -3,7 +3,7 @@ title : "Bật luồng DynamoDB"
 date :  "`r Sys.Date()`" 
 weight : 1 
 chapter : false
-pre : " <b> 4.1 </b> "
+pre : " <b> 4.3.1. </b> "
 ---
 
 Khi [kích hoạt DynamoDB streams](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html#Streams.Enabling) trên một bảng, bạn có thể chọn ghi lại một trong các tùy chọn sau:

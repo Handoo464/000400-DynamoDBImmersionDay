@@ -1,5 +1,5 @@
 ---
-title : "Kết nối đến máy chủ Public"
+title : "Bước 1 - Tạo bảng employees cho global secondary index key quá tải"
 date :  "`r Sys.Date()`" 
 weight : 1 
 chapter : false

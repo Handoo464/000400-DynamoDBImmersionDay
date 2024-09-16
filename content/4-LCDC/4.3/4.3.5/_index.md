@@ -3,7 +3,7 @@ title : "Simulate Order Updates"
 date : "`r Sys.Date()`"
 weight : 5
 chapter : false
-pre : " <b> 4.5. </b> "
+pre : " <b> 4.3.5. </b> "
 ---
 
 After creating the Orders table, you uploaded some sample orders to the table. Lets explore the items on the Orders table before simulating any updates to any orders on the table.
