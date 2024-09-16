@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Enable DynamoDB Streams on DYNAMODB IMMERSION DAY</title>
-    <link>//localhost:1313/4-lcdc/4.3/4.3.1/</link>
+    <link>https://handoo464.github.io/000400-DynamoDBImmersionDay/4-lcdc/4.3/4.3.1/</link>
     <description>Recent content in Enable DynamoDB Streams on DYNAMODB IMMERSION DAY</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:1313/4-lcdc/4.3/4.3.1/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://handoo464.github.io/000400-DynamoDBImmersionDay/4-lcdc/4.3/4.3.1/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

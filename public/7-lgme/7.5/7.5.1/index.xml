@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Add users to a game on DYNAMODB IMMERSION DAY</title>
-    <link>//localhost:1313/7-lgme/7.5/7.5.1/</link>
+    <link>https://handoo464.github.io/000400-DynamoDBImmersionDay/7-lgme/7.5/7.5.1/</link>
     <description>Recent content in Add users to a game on DYNAMODB IMMERSION DAY</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <atom:link href="//localhost:1313/7-lgme/7.5/7.5.1/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://handoo464.github.io/000400-DynamoDBImmersionDay/7-lgme/7.5/7.5.1/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
