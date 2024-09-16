@@ -27,6 +27,6 @@ aws dynamodb delete-table \
 
 The Cloudformation template that was launched during the getting started section. Navigate to the Cloudformation console, select the `amazon-dynamodb-labs` stack and click `Delete`.
 
-![](/images/1/9.png)
+![](/images/1/1.1/9.png)
 
 This should wrap up the cleanup process.

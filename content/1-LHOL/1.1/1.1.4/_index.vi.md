@@ -24,6 +24,6 @@ aws dynamodb delete-table \
 
 - Mẫu CloudFormation đã được khởi động trong phần bắt đầu. Điều hướng đến bảng điều khiển CloudFormation, chọn stack `amazon-dynamodb-labs` và nhấp vào `Delete`.
 
-![](/images/1/9.png)
+![](/images/1/1.1/9.png)
 
 Điều này sẽ hoàn tất quá trình dọn dẹp.

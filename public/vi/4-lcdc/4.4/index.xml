@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Thay đổi tính năng Thu thập dữ liệu bằng Kinesis Data Streams on DYNAMODB IMMERSION DAY</title>
-    <link>//localhost:53757/vi/4-lcdc/4.4/</link>
+    <link>//localhost:1313/vi/4-lcdc/4.4/</link>
     <description>Recent content in Thay đổi tính năng Thu thập dữ liệu bằng Kinesis Data Streams on DYNAMODB IMMERSION DAY</description>
     <generator>Hugo</generator>
     <language>vi</language>
-    <atom:link href="//localhost:53757/vi/4-lcdc/4.4/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/vi/4-lcdc/4.4/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

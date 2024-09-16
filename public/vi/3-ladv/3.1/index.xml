@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mở AWS Systems Manager Console on DYNAMODB IMMERSION DAY</title>
-    <link>//localhost:53757/vi/3-ladv/3.1/</link>
+    <link>//localhost:1313/vi/3-ladv/3.1/</link>
     <description>Recent content in Mở AWS Systems Manager Console on DYNAMODB IMMERSION DAY</description>
     <generator>Hugo</generator>
     <language>vi</language>
-    <atom:link href="//localhost:53757/vi/3-ladv/3.1/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/vi/3-ladv/3.1/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
