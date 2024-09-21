@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>LMR: Build and Deploy a Global Serverless Application with Amazon DynamoDB on DYNAMODB IMMERSION DAY</title>
+    <link>http://Handoo464.github.io/5-lmr/</link>
+    <description>Recent content in LMR: Build and Deploy a Global Serverless Application with Amazon DynamoDB on DYNAMODB IMMERSION DAY</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <atom:link href="http://Handoo464.github.io/5-lmr/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>
